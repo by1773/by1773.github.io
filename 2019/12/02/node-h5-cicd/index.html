@@ -1,0 +1,461 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"><title>使用node从零搭建自动化部署管理平台 | 汀</title><meta name="description" content="使用node从零搭建自动化部署管理平台"><meta name="keywords" content="Nodejs,CICD"><meta name="author" content="YoungBoy,live_devOps@163.com"><meta name="copyright" content="YoungBoy"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="https://hm.baidu.com"><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="使用node从零搭建自动化部署管理平台"><meta name="twitter:description" content="使用node从零搭建自动化部署管理平台"><meta name="twitter:image" content="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1584706490505&amp;di=540888cde78b81428f59ffb752fbbc91&amp;imgtype=0&amp;src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F4e7d3308ca59325ec7061e0e40605a8a82f0b6589592-Ycz8k5_fw658"><meta property="og:type" content="article"><meta property="og:title" content="使用node从零搭建自动化部署管理平台"><meta property="og:url" content="http://it-ing.cn/2019/12/02/node-h5-cicd/"><meta property="og:site_name" content="汀"><meta property="og:description" content="使用node从零搭建自动化部署管理平台"><meta property="og:image" content="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1584706490505&amp;di=540888cde78b81428f59ffb752fbbc91&amp;imgtype=0&amp;src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F4e7d3308ca59325ec7061e0e40605a8a82f0b6589592-Ycz8k5_fw658"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
+
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="http://it-ing.cn/2019/12/02/node-h5-cicd/"><link rel="prev" title="2019吧" href="http://it-ing.cn/2020/01/01/summary2019/"><link rel="next" title="生活" href="http://it-ing.cn/2018/06/23/todayFeel/"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?6a06f2b8965e4ca4e8449e48f4646237";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"title":"Snackbar.bookmark.title","message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  isHome: false,
+  isPost: true
+  
+}</script><meta name="generator" content="Hexo 4.2.0"></head><body><canvas class="fireworks"></canvas><header> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">汀</a></span><span class="toggle-menu pull_right close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-heartbeat" aria-hidden="true"></i><span> 清单</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 照片</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/book/"><i class="fa-fw fa fa-book"></i><span> 书籍</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fa-fw fa fa-coffee"></i><span> 留言板</span></a></div></div></span><span class="pull_right" id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div></header><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">25</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">29</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">15</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-heartbeat" aria-hidden="true"></i><span> 清单</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 照片</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/book/"><i class="fa-fw fa fa-book"></i><span> 书籍</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fa-fw fa fa-coffee"></i><span> 留言板</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><div class="sidebar-toc__content"><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#抛弃jenkins，使用node从零搭建自动化部署管理平台"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">抛弃jenkins，使用node从零搭建自动化部署管理平台</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#1-背景"><span class="toc_mobile_items-number">1.1.</span> <span class="toc_mobile_items-text">1. 背景</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#2-实现方案"><span class="toc_mobile_items-number">1.2.</span> <span class="toc_mobile_items-text">2. 实现方案</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#1-本地开发工程"><span class="toc_mobile_items-number">1.2.1.</span> <span class="toc_mobile_items-text">1. 本地开发工程</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-gitlab服务器"><span class="toc_mobile_items-number">1.2.2.</span> <span class="toc_mobile_items-text">2. gitlab服务器</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#3-H5-活动管理平台"><span class="toc_mobile_items-number">1.3.</span> <span class="toc_mobile_items-text">3. H5 活动管理平台</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#1-根据post请求头信息和和body数据，我们能得到如下信息："><span class="toc_mobile_items-number">1.3.1.</span> <span class="toc_mobile_items-text">1. 根据post请求头信息和和body数据，我们能得到如下信息：</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#2-执行脚本"><span class="toc_mobile_items-number">1.3.2.</span> <span class="toc_mobile_items-text">2. 执行脚本</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#3-动态扩展项目"><span class="toc_mobile_items-number">1.3.3.</span> <span class="toc_mobile_items-text">3. 动态扩展项目</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#4-队列处理"><span class="toc_mobile_items-number">1.3.4.</span> <span class="toc_mobile_items-text">4. 队列处理</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#5-CDN-发布"><span class="toc_mobile_items-number">1.3.5.</span> <span class="toc_mobile_items-text">5. CDN 发布</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#3、总结"><span class="toc_mobile_items-number">1.4.</span> <span class="toc_mobile_items-text">3、总结</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#抛弃jenkins，使用node从零搭建自动化部署管理平台"><span class="toc-number">1.</span> <span class="toc-text">抛弃jenkins，使用node从零搭建自动化部署管理平台</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-背景"><span class="toc-number">1.1.</span> <span class="toc-text">1. 背景</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-实现方案"><span class="toc-number">1.2.</span> <span class="toc-text">2. 实现方案</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-本地开发工程"><span class="toc-number">1.2.1.</span> <span class="toc-text">1. 本地开发工程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-gitlab服务器"><span class="toc-number">1.2.2.</span> <span class="toc-text">2. gitlab服务器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-H5-活动管理平台"><span class="toc-number">1.3.</span> <span class="toc-text">3. H5 活动管理平台</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-根据post请求头信息和和body数据，我们能得到如下信息："><span class="toc-number">1.3.1.</span> <span class="toc-text">1. 根据post请求头信息和和body数据，我们能得到如下信息：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-执行脚本"><span class="toc-number">1.3.2.</span> <span class="toc-text">2. 执行脚本</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-动态扩展项目"><span class="toc-number">1.3.3.</span> <span class="toc-text">3. 动态扩展项目</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-队列处理"><span class="toc-number">1.3.4.</span> <span class="toc-text">4. 队列处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-CDN-发布"><span class="toc-number">1.3.5.</span> <span class="toc-text">5. CDN 发布</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3、总结"><span class="toc-number">1.4.</span> <span class="toc-text">3、总结</span></a></li></ol></li></ol></div></div></div><main id="content-outer"><div id="top-container" style="background-image: url(https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1584706531921&amp;di=e2d267b24c4645b7ac6fae4dce6077ce&amp;imgtype=0&amp;src=http%3A%2F%2Fpic2.zhimg.com%2Fv2-c5da34501a72b33bc3efeec41f84e420_1200x500.jpg)"><div id="post-info"><div id="post-title"><div class="posttitle">使用node从零搭建自动化部署管理平台</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 发表于 2019-12-02<span class="post-meta__separator">|</span><i class="fa fa-history fa-fw" aria-hidden="true"></i> 更新于 2020-03-20</time><span class="post-meta__separator">|</span><span><i class="fa fa-inbox post-meta__icon fa-fw" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/Node/">Node</a></span><div class="post-meta-wordcount"><i class="fa fa-file-word-o post-meta__icon fa-fw" aria-hidden="true"></i><span>字数总计:</span><span class="word-count">2.9k</span><span class="post-meta__separator">|</span><i class="fa fa-clock-o post-meta__icon fa-fw" aria-hidden="true"></i><span>阅读时长: 11 分钟</span><div class="post-meta-pv-cv"><span class="post-meta__separator">|</span><span><i class="fa fa-eye post-meta__icon fa-fw" aria-hidden="true"> </i>阅读量:</span><span id="busuanzi_value_page_pv"></span></div></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><html><head></head><body><h1 id="抛弃jenkins，使用node从零搭建自动化部署管理平台"><a href="#抛弃jenkins，使用node从零搭建自动化部署管理平台" class="headerlink" title="抛弃jenkins，使用node从零搭建自动化部署管理平台"></a>抛弃jenkins，使用node从零搭建自动化部署管理平台</h1><h2 id="1-背景"><a href="#1-背景" class="headerlink" title="1. 背景"></a>1. 背景</h2><p>  H5页面由于其具有发布灵活、跨平台、易于传播等突出特点，所以H5页面是引流拉新、宣传推广的重要渠道和方式，备受各公司的青睐。<br>  在整个开发周期中，结合我司的一些情况，我总结了H5活动页面的以下特点：</p>
+<blockquote>
+<ul>
+<li>面向用户，流量大；</li>
+</ul>
+</blockquote>
+<ul>
+<li>各端展示方案不同，需要兼容各端（比如活动规则、展示模块，ios和android不一样）；</li>
+<li>需求变更频繁；</li>
+<li>合作方较多（需要跟各个业务线合作联调）；</li>
+<li>排期紧张；</li>
+<li>所以开发测试期间，部署效率就显得特别重要了。</li>
+</ul>
+<p>  由于我司的CDN发布平台，需要手动创建模板、粘贴代码，部署效率比较低下；并且活动页面代码分散，无法统一管理和实现工程化，所以决定实现一套自动化部署系统，目前已经投入使用半年时间了，极大地提高了我们的工作效率。我称这个自动化部署系统为【H5 活动管理平台】。</p>
+<h2 id="2-实现方案"><a href="#2-实现方案" class="headerlink" title="2. 实现方案"></a>2. 实现方案</h2><p align="center">
+![markdown](http://q7hgnfyvz.bkt.clouddn.com/node%E9%83%A8%E7%BD%B201.png)
+</p>
+
+<p>  该平台实现主要依赖于本地开发工程、gitlab，三者之间通过通信交互，实现的自动化部署。</p>
+<p align="center">
+![markdown](http://q7hgnfyvz.bkt.clouddn.com/node%E9%83%A8%E7%BD%B202.png)
+</p>
+
+<p>  最终达到的效果就是：当本地开发分支merge到测试分支devTest或者master分支时，该平台会自动拉取最新代码，构建目标文件，然后将目标文件部署到对应的服务器目录，另外提供了上下线、版本回滚、定时上下线等常用功能。</p>
+<p>整体架构流程图：</p>
+<p align="center">
+![markdown](http://q7hgnfyvz.bkt.clouddn.com/node%E9%83%A8%E7%BD%B203.png)
+</p>
+
+<h3 id="1-本地开发工程"><a href="#1-本地开发工程" class="headerlink" title="1. 本地开发工程"></a>1. 本地开发工程</h3><p>  我们的本地开发工程，是使用node + webpack + babel等相关技术搭建的多页面开发工程，不同的活动位于不同的目录。因为要做自动化构建部署处理，跟【H5活动管理平台】交互，所以有以下要点需要注意（可根据自己项目情况，自由调整方案）。</p>
+<p>  本地开发工程作为自动化构建部署的源头，需要提供构建命令行用于构建测试文件和线上文件，便于后面shell命令调用。如在package.json中加入如下命令：</p>
+<pre><code>"scripts": {
+    "local": "cross-env NODE_ENV=local node build.js", // 本地开发命令
+    "build": "cross-env NODE_ENV=product node build.js", // 构建上线文件
+    "test": "cross-env NODE_ENV=test node build.js" // 构建测试文件
+}</code></pre><p>  提供构建配置文件dev-config.js，用于过滤webpack构建时的入口目录，只构建编译当前正在开发的活动页面，提高构建速度。</p>
+<pre><code>//dev-config.js
+module.exports = {
+    devPages: ['test']   //  当前自己正在开发页面目录，不写时会编译所有活动页面
+}</code></pre><p>  提供活动页面目录信息配置config.json，该配置信息用于【H5活动管理平台】的展示，也就是效果图中的信息源。</p>
+<pre><code>// config.json
+{
+  "pages": [
+        {
+            "folder": "lion",
+            "desc": "前端名狮",
+            "author": "诀九",
+            "user": "juejiu"
+        },
+        {
+            "folder": "test",
+            "desc": "活动测试页面",
+            "author": "诀九",
+            "user": "juejiu"
+        }
+    ]
+}</code></pre><p>  构建生成的 JS 和 HTML 文件，存放在 dist 目录下的对应活动目录中。构建生成的目录结构如下：</p>
+<pre><code>|--dist
+   |-- lion
+       |-- lion_app.js
+       |-- index.html
+   |--test
+       |-- test_app.js
+       |-- index.html</code></pre><p>  提测时，将开发分支merge到devTest分支，上线时，将开发分支merge到master分支。<br>工程目录结构</p>
+<p align="center">
+![markdown](http://q7hgnfyvz.bkt.clouddn.com/node%E9%83%A8%E7%BD%B204.png)
+</p>
+
+<h3 id="2-gitlab服务器"><a href="#2-gitlab服务器" class="headerlink" title="2. gitlab服务器"></a>2. gitlab服务器</h3><p>  Gitlab作为企业代码版本管理工具，提供了Webhook的功能配置，Webhook顾名思义，其实就是一钩子。当我们在Gitlab上做出某些特定操作时，可以触发钩子，去进行一些我们事先设定好的脚本，以达到某些特定功能（例如–前端项目自动发布）。</p>
+<p>  实际上可以把它理解为回调，或者委托，或者事件通知，归根揭底它就是一个消息通知机制。当gitlab触发某个事件时，它会向你的所配置的http服务发送Post请求。</p>
+<blockquote>
+<p>注意：</p>
+</blockquote>
+<ul>
+<li>URL处填写的是【H5活动管理平台】部署的服务器IP;</li>
+<li>IP后面跟的merge是该平台提供的一个接口，用于触发钩子后，gitlab服务器向这个接口发送Post请求；</li>
+<li>Secret Token处填写的是一个token，主要用于merge接口请求做安全校验，可以随便设置。<br>具体配置如下图：</li>
+</ul>
+<p align="center">
+![markdown](http://q7hgnfyvz.bkt.clouddn.com/node%E9%83%A8%E7%BD%B205.png)
+</p>
+
+<p>  我们项目是设置的merge钩子，下面只贴一下Merge request events请求传递的数据信息：</p>
+<pre><code>Request header:
+
+X-Gitlab-Event: Merge Request Hook
+Request body:
+
+{
+  "object_kind": "merge_request",
+  "user": {
+    "name": "Administrator",
+    "username": "root",
+    "avatar_url": "http://www.gravatar.com/avatar/e64c7d89f26bd1972efa854d13d7dd61?s=40\u0026d=identicon"
+  },
+  "object_attributes": {
+    "id": 99,
+    "target_branch": "master",
+    "source_branch": "ms-viewport",
+    "source_project_id": 14,
+    "author_id": 51,
+    "assignee_id": 6,
+    "title": "MS-Viewport",
+    "created_at": "2013-12-03T17:23:34Z",
+    "updated_at": "2013-12-03T17:23:34Z",
+    "st_commits": null,
+    "st_diffs": null,
+    "milestone_id": null,
+    "state": "opened",
+    "merge_status": "unchecked",
+    "target_project_id": 14,
+    "iid": 1,
+    "description": "",
+    "source":{
+      "name":"Awesome Project",
+      "description":"Aut reprehenderit ut est.",
+      "web_url":"http://example.com/awesome_space/awesome_project",
+      "avatar_url":null,
+      "git_ssh_url":"git@example.com:awesome_space/awesome_project.git",
+      "git_http_url":"http://example.com/awesome_space/awesome_project.git",
+      "namespace":"Awesome Space",
+      "visibility_level":20,
+      "path_with_namespace":"awesome_space/awesome_project",
+      "default_branch":"master",
+      "homepage":"http://example.com/awesome_space/awesome_project",
+      "url":"http://example.com/awesome_space/awesome_project.git",
+      "ssh_url":"git@example.com:awesome_space/awesome_project.git",
+      "http_url":"http://example.com/awesome_space/awesome_project.git"
+    },
+    "target": {
+      "name":"Awesome Project",
+      "description":"Aut reprehenderit ut est.",
+      "web_url":"http://example.com/awesome_space/awesome_project",
+      "avatar_url":null,
+      "git_ssh_url":"git@example.com:awesome_space/awesome_project.git",
+      "git_http_url":"http://example.com/awesome_space/awesome_project.git",
+      "namespace":"Awesome Space",
+      "visibility_level":20,
+      "path_with_namespace":"awesome_space/awesome_project",
+      "default_branch":"master",
+      "homepage":"http://example.com/awesome_space/awesome_project",
+      "url":"http://example.com/awesome_space/awesome_project.git",
+      "ssh_url":"git@example.com:awesome_space/awesome_project.git",
+      "http_url":"http://example.com/awesome_space/awesome_project.git"
+    },
+    "last_commit": {
+      "id": "da1560886d4f094c3e6c9ef40349f7d38b5d27d7",
+      "message": "fixed readme",
+      "timestamp": "2012-01-03T23:36:29+02:00",
+      "url": "http://example.com/awesome_space/awesome_project/commits/da1560886d4f094c3e6c9ef40349f7d38b5d27d7",
+      "author": {
+        "name": "GitLab dev user",
+        "email": "gitlabdev@dv6700.(none)"
+      }
+    },
+    "work_in_progress": false,
+    "url": "http://example.com/diaspora/merge_requests/1",
+    "action": "open",
+    "assignee": {
+      "name": "User1",
+      "username": "user1",
+      "avatar_url": "http://www.gravatar.com/avatar/e64c7d89f26bd1972efa854d13d7dd61?s=40\u0026d=identicon"
+    }
+  }
+}</code></pre><h2 id="3-H5-活动管理平台"><a href="#3-H5-活动管理平台" class="headerlink" title="3. H5 活动管理平台"></a>3. H5 活动管理平台</h2><p>  当开发者merge代码到GitLab服务器，会触发merge事件，GitLab会发送一个POST请求连带数据（数据格式）给webhooks指定的URL，该平台接收到URL请求后，就涉及如下关键技术点：</p>
+<h3 id="1-根据post请求头信息和和body数据，我们能得到如下信息："><a href="#1-根据post请求头信息和和body数据，我们能得到如下信息：" class="headerlink" title="1. 根据post请求头信息和和body数据，我们能得到如下信息："></a>1. 根据post请求头信息和和body数据，我们能得到如下信息：</h3><blockquote>
+<ul>
+<li>merge的目标分支：req.body.object_attributes.target_branch；</li>
+</ul>
+</blockquote>
+<ul>
+<li>安全校验token：req.headers[‘x-gitlab-token’]；</li>
+<li>gitlab工程仓库地址：req.body.project.git_ssh_url</li>
+<li>触发的钩子行为类型：req.body.object_attributes.action</li>
+</ul>
+<pre><code>// gitlab触发merge请求
+router.post('/merge', function (req, res, next) {
+    let git_ssh_url = req.body.project.git_ssh_url;
+    let name = req.body.project.name;
+    // 上线merge分支master
+    if (req.headers['x-gitlab-token'] == 'mergeRequest' && req.body.object_attributes.target_branch == 'master' && req.body.object_attributes.action == 'merge') {
+        if (config[name] && config[name].git_ssh_url == git_ssh_url) {
+            mergeTaskQueue.addTask(function () {
+                getCode.init(git_ssh_url, name, 'master').then(function (data) {
+                    console.log(data);
+                    mergeTaskQueue.run();
+                }).catch(function (error) {
+                    console.log(error);
+                    mergeTaskQueue.run();
+                })
+            }.bind(null, git_ssh_url, name));
+        }
+        res.end('receive request');
+        // 测试merge分支dev
+    } else if (req.headers['x-gitlab-token'] == 'mergeRequest' && req.body.object_attributes.target_branch == config[name].testEnv.targetBranch && req.body.object_attributes.action == 'merge') {
+        if (config[name] && config[name].git_ssh_url == git_ssh_url) {
+            mergeTaskQueue.addTask(function () {
+                getCode.init(git_ssh_url, name, req.body.object_attributes.target_branch).then(function (data) {
+                    console.log(data);
+                    mergeTaskQueue.run();
+                }).catch(function (error) {
+                    console.log(error);
+                    mergeTaskQueue.run();
+                })
+            }.bind(null, git_ssh_url, name));
+        }
+        res.end('receive request');
+    } else {
+        return res.end('receive request');
+    }
+})</code></pre><h3 id="2-执行脚本"><a href="#2-执行脚本" class="headerlink" title="2. 执行脚本"></a>2. 执行脚本</h3><p>  脚本这块没有使用shell脚本，而是使用了node版本的shell.js库，这个库可以让我们控制执行逻辑，更友好的处理错误信息，帮助平台有更友好的信息展示。</p>
+<p>拉取最新代码进行构建出目标文件，大致逻辑如下图：</p>
+<p align="center">
+
+</p><p><a href="http://q7hgnfyvz.bkt.clouddn.com/node%E9%83%A8%E7%BD%B206.png" target="_blank" rel="noopener" data-fancybox="group" data-caption="markdown" class="fancybox"><img alt="markdown" title="markdown" data-src="http://q7hgnfyvz.bkt.clouddn.com/node%E9%83%A8%E7%BD%B206.png" class="lazyload"></a></p>
+<p></p>
+
+<p>目标代码</p>
+<pre><code>function init(git_ssh_url, projectName, targetBranch) {
+    deferred = Q.defer();
+    if (!git_ssh_url || !projectName) {
+        return deferred.reject('项目地址或者项目名称为空');
+    }
+    repository = git_ssh_url;
+    repositoryName = projectName;
+    clonePath = path.join(__dirname, '../projects/' + projectName);
+
+    shell.exec('exit 0');
+    if (shell.test('-e', clonePath)) {
+        shell.cd(clonePath);
+        let currentBranch = shell.exec('git symbolic-ref --short -q HEAD', {async: false, silent: true}).stdout;
+        if(currentBranch != targetBranch) {
+            let outInfo = shell.exec('git branch', {async: false, silent: true}).stdout;
+            let gitcmd = outInfo.indexOf(targetBranch) >= 0 ? ('git checkout ' + targetBranch) : ('git checkout -b ' + targetBranch + ' origin/' + targetBranch);
+            shell.exec('git pull && ' + gitcmd, {async: false, silent: true});
+        }
+        shell.exec('git pull', {async: false, silent: true}, function (code, stdout, stderr) {
+            if (code != 0) {
+                console.log(stderr);
+                return deferred.reject('git pull error');
+            }
+            console.log(stdout);
+            console.log('git pull run success');
+            return buildTest(projectName, targetBranch);
+        })
+    } else {
+        if (!fs.existsSync(projects_path)) {
+            fs.mkdirSync(projects_path);
+        }
+        shell.cd(projects_path);
+        shell.exec('git clone ' + repository, function (code, stdout, stderr) {
+            if (code != 0) {
+                console.log(stderr);
+                return deferred.reject('git clone error');
+            }
+            console.log('git clone success');
+            shell.cd(clonePath);
+            let outInfo = shell.exec('git branch', {async: false, silent: true}).stdout;
+            let gitcmd = outInfo.indexOf(targetBranch) >= 0 ? ('git checkout ' + targetBranch) : ('git checkout -b ' + targetBranch + ' origin/' + targetBranch);
+            shell.exec(gitcmd, {async: false, silent: true});
+            return buildTest(projectName, targetBranch);
+        })
+    }
+    return deferred.promise;
+}</code></pre><pre><code>
+// 构建项目
+function buildTest(projectName, targetBranch) {
+    shell.cd(clonePath);
+    shell.exec('npm config set registry https://registry.npm.taobao.org && npm install', {async: true, silent: true}, function (code, stdout, stderr) {
+        if (code != 0) {
+            console.log(stderr);
+            return deferred.reject('npm install error');
+        }
+        console.log('npm install success');
+        shell.rm('-rf', path.join(clonePath, 'dist'));
+        let testCommand = config[repositoryName].commands.test || 'npm run test'; //构建测试文件命令行
+        shell.exec(testCommand, {async: true, silent: true}, function (code, stdout, stderr) {
+            if (code != 0) {
+                console.log(stderr);
+                return deferred.reject('npm run test fail');
+            }
+            console.log('npm run test success');
+            copyPage(repositoryName, 'test'); // copy到测试目录
+            if(targetBranch != 'master') {
+                shell.exec('exit 0');
+                deferred.resolve('build success and finish');
+                return; // 提测时只构建测试文件
+            }
+            // 构建最终上线文件
+            shell.rm('-rf', path.join(clonePath, 'dist'));
+            let buildCommand = config[repositoryName].commands.build || 'npm run build'; //构建预上线文件命令行
+            shell.exec(buildCommand, {async: true, silent: true}, function (code, stdout, stderr) {
+                if (code != 0) {
+                    console.log(stderr);
+                    return deferred.reject('npm run build fail');
+                }
+                console.log('npm run build success');
+                copyPage(repositoryName, 'online'); //copy到上线正式目录
+
+                // 每次合并master构建后，都切换到测试分支，便于平台读取config.json信息（测试分支是最新的）
+                shell.exec('git checkout ' + config[projectName].testEnv.targetBranch, {async: false, silent: false}); 
+                shell.exec('exit 0');
+                deferred.resolve('build success and finish');
+            })
+        })
+    })
+}</code></pre><h3 id="3-动态扩展项目"><a href="#3-动态扩展项目" class="headerlink" title="3. 动态扩展项目"></a>3. 动态扩展项目</h3><p>  通过修改项目配置文件，接入不同的项目，配置信息有每个项目要上传的CDN路径、构建命令、项目目录展示信息文件路径（config.json），如下图：</p>
+<pre><code>// 接入该平台的项目列表
+module.exports = {
+    'h5-activity-cms': {
+        git_ssh_url: 'git@example.com:awesome_space/awesome_project.git',
+        desc: '前端名狮项目',
+        tabContent: '前端名狮', //页面中tab展示文字
+        onlineParam: { //上传cdn的参数，根据自己项目设置
+            html: {
+                domain: '',
+                path: ''
+            },
+            js: {
+                domain: '',
+                path: ''
+            }
+        },
+        commands: { //构建脚本命令行
+            test: 'npm run test',
+            build: 'npm run build'
+        },
+
+        configFile: 'config.json', // 活动页面列表信息
+    }
+}</code></pre><h3 id="4-队列处理"><a href="#4-队列处理" class="headerlink" title="4. 队列处理"></a>4. 队列处理</h3><p>  构建目标文件的过程中，很多生成文件、压缩、copy的异步操作，不同的merge请求，有可能操作的是同一个文件，所以需要对merge请求做队列处理。</p>
+<pre><code>class TaskQueue {
+    constructor() {
+        this.list = [];
+        this.isRunning = false;
+    }
+    addTask(task) {
+        this.list.push(task);
+        if(this.isRunning) {
+            return;
+        }
+        this.start();
+    }
+    shift() {
+        return this.list.length > 0 ? this.list.shift() : null;
+    }
+    run() {
+        let task = this.shift();
+        if(!task) {
+            this.isRunning = false;
+            return;
+        }
+        task();
+    }
+    start() {
+        this.isRunning = true;
+        this.run();
+    }
+}
+module.exports = TaskQueue;</code></pre><h3 id="5-CDN-发布"><a href="#5-CDN-发布" class="headerlink" title="5. CDN 发布"></a>5. CDN 发布</h3><p>  这个需要后端同学提供一个服务接口，用于推送文件到CDN上或者服务器上。我们这边是借助于一个服务端接口，我们通过node上传到他们的服务器，接口方会定时推送文件到CDN，具体每个人的情况处理吧哈。</p>
+<h2 id="3、总结"><a href="#3、总结" class="headerlink" title="3、总结"></a>3、总结</h2><blockquote>
+<ul>
+<li>该平台使用node实现了一个微型的、类似jenkins功能的部署管理平台，具有如下突出的优点：</li>
+</ul>
+</blockquote>
+<ul>
+<li>该平台打通了本地开发环境和测试环境部署，实现了测试部署自动化，节省了人工上传粘贴代码的时间，大大地提高了工作效率；</li>
+<li>基于项目工程划分的类别，便于开发者高效率的查找页面；</li>
+<li>支持动态扩展，可以通过添加配置文件，接入其他gitlab项目；</li>
+<li>可以根据需要定制化平台操作页面，比使用jenkins更灵活，更轻便；</li>
+</ul>
+</body></html></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:live_devOps@163.com">YoungBoy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://it-ing.cn/2019/12/02/node-h5-cicd/">http://it-ing.cn/2019/12/02/node-h5-cicd/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://it-ing.cn">汀</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/Nodejs/">Nodejs    </a><a class="post-meta__tags" href="/tags/CICD/">CICD    </a></div><div class="post_share"><div class="social-share" data-image="https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1584706490505&amp;di=540888cde78b81428f59ffb752fbbc91&amp;imgtype=0&amp;src=http%3A%2F%2Fhbimg.b0.upaiyun.com%2F4e7d3308ca59325ec7061e0e40605a8a82f0b6589592-Ycz8k5_fw658" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/wechat.jpg" alt="微信"><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/alipay.jpg" alt="支付寶"><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/01/01/summary2019/"><img class="prev_cover lazyload" data-src="https://goss.cfp.cn/cms/image/image/e20792f5fcbd413291620b5eb95e1397.gif" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>2019吧</span></div></a></div><div class="next-post pull_right"><a href="/2018/06/23/todayFeel/"><img class="next_cover lazyload" data-src="https://goss3.cfp.cn/creative/vcg/nowarter800/version2/126163465.jpg?x-oss-process=image/format,webp" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>生活</span></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="lv-container" data-id="city" data-uid="MTAyMC8zOTA5NS8xNTYyMg=="><script>(function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+})(document, 'script');</script></div></div></div></main><footer id="footer" style="background-image: url(https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1584706531921&amp;di=e2d267b24c4645b7ac6fae4dce6077ce&amp;imgtype=0&amp;src=http%3A%2F%2Fpic2.zhimg.com%2Fv2-c5da34501a72b33bc3efeec41f84e420_1200x500.jpg)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2020</div><div class="framework-info"><span>Power By</span><a href="https://github.com/by1773" target="_blank" rel="noopener"></a><span class="footer-separator">YoungBoy</span></div><div class="footer_custom_text">既然来了,就别着急走哇~</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/fireworks.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/canvas-nest.js"></script><script src="https://cdn.jsdelivr.net/npm/activate-power-mode/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true; 
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><script src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/ClickShowText.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

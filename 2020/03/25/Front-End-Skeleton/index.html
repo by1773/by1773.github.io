@@ -1,0 +1,526 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"><title>前端骨架屏生成技术揭秘 | 汀</title><meta name="description" content="前端骨架屏生成技术揭秘"><meta name="keywords" content="骨架屏,node"><meta name="author" content="YoungBoy,live_devOps@163.com"><meta name="copyright" content="YoungBoy"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="https://hm.baidu.com"><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="前端骨架屏生成技术揭秘"><meta name="twitter:description" content="前端骨架屏生成技术揭秘"><meta name="twitter:image" content="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1912403690,2623160076&amp;fm=26&amp;gp=0.jpg"><meta property="og:type" content="article"><meta property="og:title" content="前端骨架屏生成技术揭秘"><meta property="og:url" content="http://it-ing.cn/2020/03/25/Front-End-Skeleton/"><meta property="og:site_name" content="汀"><meta property="og:description" content="前端骨架屏生成技术揭秘"><meta property="og:image" content="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1912403690,2623160076&amp;fm=26&amp;gp=0.jpg"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
+
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="http://it-ing.cn/2020/03/25/Front-End-Skeleton/"><link rel="prev" title="Flutter-Template开发规范(Flutter-go)" href="http://it-ing.cn/2020/03/30/flutter-dev-standard/"><link rel="next" title="舒适访问对象深层次属性~" href="http://it-ing.cn/2020/03/24/TypeScript-GetObjectPrpos/"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?6a06f2b8965e4ca4e8449e48f4646237";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"title":"Snackbar.bookmark.title","message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  isHome: false,
+  isPost: true
+  
+}</script><meta name="generator" content="Hexo 4.2.0"></head><body><canvas class="fireworks"></canvas><header> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">汀</a></span><span class="toggle-menu pull_right close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-heartbeat" aria-hidden="true"></i><span> 清单</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 照片</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/book/"><i class="fa-fw fa fa-book"></i><span> 书籍</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fa-fw fa fa-coffee"></i><span> 留言板</span></a></div></div></span><span class="pull_right" id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div></header><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">25</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">29</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">15</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-heartbeat" aria-hidden="true"></i><span> 清单</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 照片</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/book/"><i class="fa-fw fa fa-book"></i><span> 书籍</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fa-fw fa fa-coffee"></i><span> 留言板</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><div class="sidebar-toc__content"><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#1-为什么要使用骨架屏"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">1. 为什么要使用骨架屏</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#2-骨架屏技术总览"><span class="toc_mobile_items-number">2.</span> <span class="toc_mobile_items-text">2. 骨架屏技术总览</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#3-自动生成骨架屏技术揭秘"><span class="toc_mobile_items-number">3.</span> <span class="toc_mobile_items-text">3. 自动生成骨架屏技术揭秘</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#3-1-使用-Puppeteer-渲染页面"><span class="toc_mobile_items-number">3.1.</span> <span class="toc_mobile_items-text">3.1 使用 Puppeteer 渲染页面</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#3-2-页面-DOM-处理"><span class="toc_mobile_items-number">3.2.</span> <span class="toc_mobile_items-text">3.2 页面 DOM 处理</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#3-2-1-预处理"><span class="toc_mobile_items-number">3.2.1.</span> <span class="toc_mobile_items-text">3.2.1 预处理</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#3-2-2-列表处理"><span class="toc_mobile_items-number">3.2.2.</span> <span class="toc_mobile_items-text">3.2.2 列表处理</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#3-2-3-其他节点"><span class="toc_mobile_items-number">3.2.3.</span> <span class="toc_mobile_items-text">3.2.3 其他节点</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#3-2-4-文本类型特殊处理"><span class="toc_mobile_items-number">3.2.4.</span> <span class="toc_mobile_items-text">3.2.4 文本类型特殊处理</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#3-2-5-处理页面节点入口函数"><span class="toc_mobile_items-number">3.2.5.</span> <span class="toc_mobile_items-text">3.2.5 处理页面节点入口函数</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#3-2-6-使用-rollup-打包脚本"><span class="toc_mobile_items-number">3.2.6.</span> <span class="toc_mobile_items-text">3.2.6 使用 rollup 打包脚本</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#4-1-参数配置"><span class="toc_mobile_items-number">3.3.</span> <span class="toc_mobile_items-text">4.1 参数配置</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#4-2-一键生成骨架屏"><span class="toc_mobile_items-number">3.4.</span> <span class="toc_mobile_items-text">4.2 一键生成骨架屏</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#4-3-解决登录问题"><span class="toc_mobile_items-number">3.5.</span> <span class="toc_mobile_items-text">4.3 解决登录问题</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#4-4-DOM-节点配置"><span class="toc_mobile_items-number">3.6.</span> <span class="toc_mobile_items-text">4.4 DOM 节点配置</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#5-开发骨架屏生成平台"><span class="toc_mobile_items-number">4.</span> <span class="toc_mobile_items-text">5. 开发骨架屏生成平台</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#6-参与贡献"><span class="toc_mobile_items-number">5.</span> <span class="toc_mobile_items-text">6. 参与贡献</span></a></li></ol></div></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#1-为什么要使用骨架屏"><span class="toc-number">1.</span> <span class="toc-text">1. 为什么要使用骨架屏</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#2-骨架屏技术总览"><span class="toc-number">2.</span> <span class="toc-text">2. 骨架屏技术总览</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#3-自动生成骨架屏技术揭秘"><span class="toc-number">3.</span> <span class="toc-text">3. 自动生成骨架屏技术揭秘</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-使用-Puppeteer-渲染页面"><span class="toc-number">3.1.</span> <span class="toc-text">3.1 使用 Puppeteer 渲染页面</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-页面-DOM-处理"><span class="toc-number">3.2.</span> <span class="toc-text">3.2 页面 DOM 处理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1-预处理"><span class="toc-number">3.2.1.</span> <span class="toc-text">3.2.1 预处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2-列表处理"><span class="toc-number">3.2.2.</span> <span class="toc-text">3.2.2 列表处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-3-其他节点"><span class="toc-number">3.2.3.</span> <span class="toc-text">3.2.3 其他节点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-4-文本类型特殊处理"><span class="toc-number">3.2.4.</span> <span class="toc-text">3.2.4 文本类型特殊处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-5-处理页面节点入口函数"><span class="toc-number">3.2.5.</span> <span class="toc-text">3.2.5 处理页面节点入口函数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-6-使用-rollup-打包脚本"><span class="toc-number">3.2.6.</span> <span class="toc-text">3.2.6 使用 rollup 打包脚本</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-1-参数配置"><span class="toc-number">3.3.</span> <span class="toc-text">4.1 参数配置</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-2-一键生成骨架屏"><span class="toc-number">3.4.</span> <span class="toc-text">4.2 一键生成骨架屏</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-3-解决登录问题"><span class="toc-number">3.5.</span> <span class="toc-text">4.3 解决登录问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-4-DOM-节点配置"><span class="toc-number">3.6.</span> <span class="toc-text">4.4 DOM 节点配置</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#5-开发骨架屏生成平台"><span class="toc-number">4.</span> <span class="toc-text">5. 开发骨架屏生成平台</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#6-参与贡献"><span class="toc-number">5.</span> <span class="toc-text">6. 参与贡献</span></a></li></ol></div></div></div><main id="content-outer"><div id="top-container" style="background-image: url(https://goss1.cfp.cn/creative/vcg/veer/400/new/VCG41N680280554.jpg?x-oss-process=image/format,webp)"><div id="post-info"><div id="post-title"><div class="posttitle">前端骨架屏生成技术揭秘</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 发表于 2020-03-25<span class="post-meta__separator">|</span><i class="fa fa-history fa-fw" aria-hidden="true"></i> 更新于 2020-03-26</time><span class="post-meta__separator">|</span><span><i class="fa fa-inbox post-meta__icon fa-fw" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></span><div class="post-meta-wordcount"><i class="fa fa-file-word-o post-meta__icon fa-fw" aria-hidden="true"></i><span>字数总计:</span><span class="word-count">3.3k</span><span class="post-meta__separator">|</span><i class="fa fa-clock-o post-meta__icon fa-fw" aria-hidden="true"></i><span>阅读时长: 12 分钟</span><div class="post-meta-pv-cv"><span class="post-meta__separator">|</span><span><i class="fa fa-eye post-meta__icon fa-fw" aria-hidden="true"> </i>阅读量:</span><span id="busuanzi_value_page_pv"></span></div></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><html><head><!-- # 前端骨架屏生成技术揭秘 -->
+
+</head><body><h1 id="1-为什么要使用骨架屏"><a href="#1-为什么要使用骨架屏" class="headerlink" title="1. 为什么要使用骨架屏"></a>1. 为什么要使用骨架屏</h1><p>骨架屏就是在页面数据尚未加载前，先给用户展示出页面的大致结构（灰色占位图），直到请求数据返回后再渲染页面，补充进需要显示的数据内容，考拉H5购物车就使用了骨架屏技术：</p>
+<p><a href="./1.gif" data-fancybox="group" data-caption="markdown" class="fancybox"><img alt="markdown" title="markdown" data-src="./1.gif" class="lazyload"></a></p>
+<p>了解了骨架屏是什么，我们来看看为什么要使用骨架屏。 假如能在加载前把网页的大概轮廓预先显示，接着再逐渐加载真正内容，这样既降低了用户的焦灼情绪，又能使界面加载过程变得自然通畅，不会造成网页长时间白屏或者闪烁。骨架屏能给人一种页面内容“已经渲染出一部分”的感觉，相较于传统的 loading 效果，在一定程度上可<strong>提升用户体验</strong>。尤其在下面场景中，骨架屏技术能极大提高用户体验：</p>
+<ul>
+<li>网络较慢，需要长时间等待加载处理的情况下。</li>
+<li>图文信息内容较多的列表/卡片中。</li>
+<li>首屏加载数据量较大的时候。</li>
+</ul>
+<h1 id="2-骨架屏技术总览"><a href="#2-骨架屏技术总览" class="headerlink" title="2. 骨架屏技术总览"></a>2. 骨架屏技术总览</h1><p>目前主流的骨架屏生成技术主要包括以下三种：</p>
+<ol>
+<li>通过设计师给出的骨架屏图片。</li>
+<li>通过 HTML+CSS 编写骨架屏代码。</li>
+<li>非侵入式自动生成骨架屏代码。</li>
+</ol>
+<p>前两种情况由于变更成本和续维护成本高，且对业务代码有一定侵入性，不进行讨论。业界对于自动生成骨架屏有多种实践，但是存在一些问题，有些配置较少，生成效果较差；有些操作繁琐，项目集成成本高，且难以定制。</p>
+<p>本文主要针对自动生成骨架屏技术进行了深入的探讨，并开发了 awesome-skeleton，支持多种配置，以及骨架屏定制功能，并提供骨架图生成和骨架图模板注入能力。</p>
+<h1 id="3-自动生成骨架屏技术揭秘"><a href="#3-自动生成骨架屏技术揭秘" class="headerlink" title="3. 自动生成骨架屏技术揭秘"></a>3. 自动生成骨架屏技术揭秘</h1><p>谷歌浏览器在2017年自行开发了 Chrome Headless 特性，并与之同时推出了 Puppeteer。Puppeteer 是一个 Node库，提供了一组用来操纵 Chrome 的 API，默认 Headless 也就是无界面的chrome，俗称“无头浏览器”。我们在浏览器中完成的大多数操作都可以在 Puppeteer 中完成，比如截图、爬虫、自动化测试、性能分析等。</p>
+<p>借助 Puppeteer，我们对自动生成骨架屏方案进行了如下设计：</p>
+<ul>
+<li>使用 Puppeteer 进行页面渲染，获取页面 DOM 结构；</li>
+<li>命令行工具生成骨架屏代码，并支持第三方平台接入；</li>
+<li>支持页面登录态、不同设备页面显示、列表重复渲染、骨架屏灰色块大小配置；</li>
+<li>支持骨架屏图片压缩和代码自动生成；</li>
+<li>通过 DOM 属性进行骨架屏细粒度的配置，指定节点配置，包括背景色、是否在骨架屏中显示等。</li>
+</ul>
+<p>我们可以通过传入页面地址，使用无头浏览器打开页面，对页面首屏图片和文本等节点进行灰色背景处理，然后对页面首屏进行截图，生成压缩后的 base64 png 图片，并注入 HTML + CSS，从而自动生成页面骨架屏。流程见下图：</p>
+<p><a href="./2.jpg" data-fancybox="group" data-caption="img" class="fancybox"><img alt="img" title="img" data-src="./2.jpg" class="lazyload"></a></p>
+<h2 id="3-1-使用-Puppeteer-渲染页面"><a href="#3-1-使用-Puppeteer-渲染页面" class="headerlink" title="3.1 使用 Puppeteer 渲染页面"></a>3.1 使用 Puppeteer 渲染页面</h2><p>使用 Puppeteer 可以指定不同设备模拟器来渲染页面，从而获取页面的 DOM 结构。关键代码：</p>
+<pre><code class="javascript">// 初始化无头浏览器
+const browser = await puppeteer.launch({
+  headless: !options.debug, // 是否打开无头浏览器
+  args: [ '--no-sandbox', '--disable-setuid-sandbox' ],
+});
+// 打开新页面
+const page = await browser.newPage();
+// 指定设备模拟器
+const device = devices[options.device] || desktopDevice;
+await page.emulate(device);
+// 打开指定页面
+await page.goto(options.pageUrl);</code></pre>
+<p>获取到页面 DOM 结构之后，需要对其进行处理，例如将图片转换为灰色色块，隐藏大小小于一定阈值的节点，这里我们通过向页面中动态插入一端 JavaScript 脚本，对页面节点进行处理，从而生成骨架屏。关键代码：</p>
+<pre><code class="javascript">// 获取处理 DOM 节点的脚本代码
+const scriptContent = await genScriptContent();
+// 将代码插入到页面中
+await page.addScriptTag({ content: scriptContent });</code></pre>
+<h2 id="3-2-页面-DOM-处理"><a href="#3-2-页面-DOM-处理" class="headerlink" title="3.2 页面 DOM 处理"></a>3.2 页面 DOM 处理</h2><p>下面我们来重点看看如何对页面节点进行处理，主要包括以下内容：</p>
+<p><a href="./3.jpg" data-fancybox="group" data-caption="img" class="fancybox"><img alt="img" title="img" data-src="./3.jpg" class="lazyload"></a></p>
+<h3 id="3-2-1-预处理"><a href="#3-2-1-预处理" class="headerlink" title="3.2.1 预处理"></a>3.2.1 预处理</h3><p>首先，对页面所有节点进行下列处理：</p>
+<ul>
+<li>置空所有大小小于指定阈值的节点</li>
+<li>所有节点背景图设置为 none，并且将背景色设置为骨架屏主色调（灰色）</li>
+<li>所有节点阴影、边框颜色设置为主色调</li>
+<li>置空所有标签中含有 “data-skeleton-empty” 属性的节点</li>
+<li>若节点设置了“data-skeleton-bgcolo”，则选取其属性值来设置背景色。### 文本处理 本文处理是所有节点中比较复杂的一种，需要考虑文本是一行还是多行、文本是位置是居中还是左对齐等，通过获取文本位置和样式，通过简单的计算来设置灰色色块位置。下面只列出了关键代码，全部代码见：text.js。</li>
+</ul>
+<pre><code class="javascript">// 获取行高
+if (!/\d/.test(lineHeight)) {
+  const fontSizeNum = parseInt(fontSize, 10) || 14;
+  lineHeight = `${fontSizeNum * 1.4}px`;
+}
+// 获取行数
+let lineCount = (height - parseFloat(paddingTop, 10) - parseFloat(paddingBottom, 10)) / parseFloat(lineHeight, 10) || 0;
+lineCount = lineCount < 1.5 ? 1 : lineCount;
+// 设置文本色块样式
+ele.classList.add(SKELETON_TEXT_CLASS);
+Object.assign(ele.style, {
+  backgroundImage: `linear-gradient(
+  transparent ${(1 - textHeightRatio) / 2 * 100}%,
+  ${MAIN_COLOR} 0%,
+  ${MAIN_COLOR} ${((1 - textHeightRatio) / 2 + textHeightRatio) * 100}%,
+  transparent 0%
+  )`,
+  backgroundSize: `100% ${px2rem(parseInt(lineHeight) * 1.1)}`,
+  position,
+});
+// 添加文本Mask
+if (lineCount > 1) { // 多行情况特殊处理
+  addTextMask(ele, Object.assign(JSON.parse(JSON.stringify(comStyle)), {
+    lineHeight,
+  }));
+} else { // 单行文本处理
+  const textWidthPercent = textWidth / (width - parseInt(paddingRight, 10) - parseInt(paddingLeft, 10));
+  ele.style.backgroundSize = `${textWidthPercent * 100}% 100%`;
+  switch (textAlign) {
+    case 'left':
+      break;
+    case 'right':
+      ele.style.backgroundPositionX = '100%';
+      break;
+    default: // center
+      ele.style.backgroundPositionX = '50%';
+      break;
+  }
+}</code></pre>
+<h3 id="3-2-2-列表处理"><a href="#3-2-2-列表处理" class="headerlink" title="3.2.2 列表处理"></a>3.2.2 列表处理</h3><p>可以根据配置，对列表进行重复处理，也就是根据列表的第一项重复渲染其他项，关键代码：</p>
+<pre><code class="javascript">const listHandler = (node, options) => {
+  if (!options.openRepeatList || !node.children.length) return;
+  const children = node.children;
+  const len = Array.from(children).filter(child => LIST_ITEM_TAG.indexOf(child.tagName) > -1).length;
+  if (len === 0) return false;
+  const firstChild = children[0];
+  // 若元素不是列表节点，则递归处理
+  if (LIST_ITEM_TAG.indexOf(firstChild.tagName) === -1) {
+    return listHandler(firstChild, options);
+  }
+  // 只保留第一个项目
+  Array.from(children).forEach((li, index) => {
+    if (index > 0) {
+      removeElement(li);
+    }
+  });
+  // 重复渲染剩余项
+  for (let i = 1; i < len; i++) {
+    node.appendChild(firstChild.cloneNode(true));
+  }
+};</code></pre>
+<h3 id="3-2-3-其他节点"><a href="#3-2-3-其他节点" class="headerlink" title="3.2.3 其他节点"></a>3.2.3 其他节点</h3><p>其他节点的处理较为简单，有兴趣可以在 Github 上查看代码，这里有几个需要关注的点：</p>
+<ul>
+<li>a 标签需要移除 href 属性</li>
+<li>button 标签需要设置宽高，保证在移除按钮文案后宽高不变</li>
+<li>img 标签也需要设置宽高，并将 src 设置为 1px 的 base64</li>
+<li>input 标签需要移除 placeholder</li>
+<li>伪元素同样需要处理。</li>
+</ul>
+<h3 id="3-2-4-文本类型特殊处理"><a href="#3-2-4-文本类型特殊处理" class="headerlink" title="3.2.4 文本类型特殊处理"></a>3.2.4 文本类型特殊处理</h3><p>需要注意的是，对于文本节点，由于存在下面的情况，所以需要进行特殊处理：</p>
+<pre><code class="html"><span>111<a>222</a></span> 文本中包含超链接
+<span>111<a href="xx" data-fancybox="group" data-caption="undefined" class="fancybox"><img data-src="xx" class="lazyload"></a></span> 文本中包含图片
+111 文本没有使用标签包裹</code></pre>
+<p>文本类型进行处理的关键代码：</p>
+<pre><code class="javascript">handleText(node) {
+  const tagName = node.tagName && node.tagName.toUpperCase();
+  // 处理 <div>xxx</div> or <a>xxx</a>
+  if (node.childNodes && node.childNodes.length === 1 && node.childNodes[0].nodeType === 3) {
+    handler.text(node, this.options);
+    return true;
+  }
+  // 处理 xxx，转换为 <i>xxx</i>
+  if (node && node.nodeType === 3 && node.textContent) {
+    const parent = node.parentNode;
+    // Determine if it has been processed
+    if (!parent.classList.contains(SKELETON_TEXT_CLASS)) {
+      // It is plain text itself and needs to be replaced with a node
+      const textContent = node.textContent.replace(/[\r\n]/g, '').trim();
+      if (textContent) {
+        const tmpNode = document.createElement('i');
+        tmpNode.classList.add(SKELETON_TEXT_CLASS);
+        tmpNode.innerText = textContent;
+        node.parentNode.replaceChild(tmpNode, node);
+        handler.text(tmpNode, this.options);
+        return true;
+      }
+    }
+  }
+  // 处理 <span>111<a>222</a></span> <span>111<a href="xx" data-fancybox="group" data-caption="undefined" class="fancybox"><img data-src="xx" class="lazyload"></a></span>
+  if (tagName === 'SPAN' && node.innerHTML) {
+    // Process image and background image first
+    this.handleImages(node.childNodes);
+    handler.text(node, this.options);
+    return true;
+  }
+  return false;
+}</code></pre>
+<h3 id="3-2-5-处理页面节点入口函数"><a href="#3-2-5-处理页面节点入口函数" class="headerlink" title="3.2.5 处理页面节点入口函数"></a>3.2.5 处理页面节点入口函数</h3><p>有些上述单个节点的处理函数，我们可以遍历页面所有节点进行处理。关键代码：</p>
+<pre><code class="javascript">handleNode(node) {
+  if (!node) return;
+  // Delete elements that are not in first screen, or marked for deletion
+  if (!inViewPort(node) || hasAttr(node, 'data-skeleton-remove')) {
+    return removeElement(node);
+  }
+  // Handling elements that are ignored by user tags -> End
+  const ignore = hasAttr(node, 'data-skeleton-ignore') || node.tagName === 'STYLE';
+  if (ignore) return;
+  // Preprocessing some styles
+  handler.before(node, this.options);
+  // Preprocessing pseudo-class style
+  handler.pseudo(node, this.options);
+  const tagName = node.tagName && node.tagName.toUpperCase();
+  const isBtn = tagName && (tagName === 'BUTTON' || /(btn)|(button)/g.test(node.getAttribute('class')));
+  let isCompleted = false;
+  switch (tagName) {
+    case 'SCRIPT':
+      handler.script(node);
+      break;
+    case 'IMG':
+      handler.img(node);
+      break;
+    case 'SVG':
+      handler.svg(node);
+      break;
+    case 'INPUT':
+      handler.input(node);
+      break;
+    case 'BUTTON': // Button processing ends once
+      handler.button(node);
+      break;
+    case 'UL':
+    case 'OL':
+    case 'DL':
+      handler.list(node, this.options);
+      break;
+    case 'A': // A label processing is placed behind to prevent IMG from displaying an exception
+      handler.a(node);
+      break;
+    default:
+      break;
+  }
+  if (isBtn) {
+    handler.button(node);
+  } else {
+    isCompleted = this.handleText(node);
+  }
+  // If it is a button and has not been processed by handleText, then the child node is processed
+  if (!isBtn && !isCompleted) {
+    this.handleNodes(node.childNodes); // 递归处理
+  }
+}</code></pre>
+<h3 id="3-2-6-使用-rollup-打包脚本"><a href="#3-2-6-使用-rollup-打包脚本" class="headerlink" title="3.2.6 使用 rollup 打包脚本"></a>3.2.6 使用 rollup 打包脚本</h3><p>由于对页面节点处理的脚本使用 es6 语法编写， 我们需要在插入页面之前，进行编译：</p>
+<pre><code class="javascript">// rollup.config.js
+export default {
+  input: 'src/script/main.js',
+  output: {
+    file: 'src/script/dist/index.js',
+    format: 'iife',
+    name: 'AwesomeSkeleton',
+  },
+};
+</code></pre>
+<p><strong>3.3 生成骨架屏代码</strong></p>
+<p>生成处理页面节点脚本之后，插入到页面中，这个时候需要一些钩子来执行页面DOM的处理。我们定义一个全局对象 AwesomeSkeleton，其中包含 genSkeleton 方法，调用后会处理页面节点。</p>
+<pre><code class="javascript">window.AwesomeSkeleton = {
+  // Entry function
+  async genSkeleton(options) {
+    this.options = options;
+    if (options.debug) {
+      await this.debugGenSkeleton(options);
+    } else {
+      await this.startGenSkeleton(); // 生成骨架屏
+    }
+  },
+  // Start generating the skeleton
+  async startGenSkeleton() {
+    this.init();
+    try {
+      this.handleNode(document.body);
+    } catch (e) {
+      console.log('==genSkeleton Error==\n', e.message, e.stack);
+    }
+  },
+  ...
+}</code></pre>
+<p>在使用 puppeteer 打开页面之后，我们注入了 rollup 打包后的脚本，这时候我们需要执行脚本才能生成骨架屏：</p>
+<pre><code class="javascript">await page.evaluate(async options => {
+  await window.AwesomeSkeleton.genSkeleton(options);
+}, options);</code></pre>
+<p>生成骨架屏后，我们通过调用 puppeteer 的截图接口，生成骨架屏图片，并使用 images 包进行图片压缩，生成 base64，从而生成骨架屏代码。</p>
+<pre><code class="javascript">// First screen skeleton screenshot
+await page.screenshot({
+  path: screenshotPath,
+});
+const imgWidth = options.device ? 375 : 1920;
+// Use images for image compression
+await images(screenshotPath).size(imgWidth).save(screenshotPath);
+const skeletonImageBase64 = base64Img.base64Sync(screenshotPath);
+// Inject the skeleton into the desired page
+const result = insertSkeleton(skeletonImageBase64, options);</code></pre>
+<p><strong>4. 使用 awesome-skeleton</strong></p>
+<p>通过上述讨论的技术方案，我们实现了 awesome-skeleton 骨架屏生成工具。支持命令行生成骨架屏代码，同时也可以非常方便的在第三方平台接入。</p>
+<h2 id="4-1-参数配置"><a href="#4-1-参数配置" class="headerlink" title="4.1 参数配置"></a>4.1 参数配置</h2><table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>必填</th>
+<th>默认值</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>pageUrl</td>
+<td>是</td>
+<td>-</td>
+<td>页面地址（此地址必须可访问）</td>
+</tr>
+<tr>
+<td>pageName</td>
+<td>否</td>
+<td>output</td>
+<td>页面名称（仅限英文）</td>
+</tr>
+<tr>
+<td>cookies</td>
+<td>否</td>
+<td></td>
+<td>页面 Cookies，用来解决登录态问题</td>
+</tr>
+<tr>
+<td>outputPath</td>
+<td>否</td>
+<td>skeleton-output</td>
+<td>骨架图文件输出文件夹路径，默认到项目 skeleton-output 中</td>
+</tr>
+<tr>
+<td>openRepeatList</td>
+<td>否</td>
+<td>true</td>
+<td>默认会将每个列表的第一项进行复制</td>
+</tr>
+<tr>
+<td>device</td>
+<td>否</td>
+<td>PC</td>
+<td>参考 puppeteer/DeviceDescriptors.js，可以设置为 ‘iPhone 6 Plus’</td>
+</tr>
+<tr>
+<td>debug</td>
+<td>否</td>
+<td>false</td>
+<td>是否开启调试开关</td>
+</tr>
+<tr>
+<td>debugTime</td>
+<td>否</td>
+<td>0</td>
+<td>调试模式下，页面停留在骨架图的时间</td>
+</tr>
+<tr>
+<td>minGrayBlockWidth</td>
+<td>否</td>
+<td>0</td>
+<td>最小处理灰色块的宽度</td>
+</tr>
+<tr>
+<td>minGrayPseudoWidth</td>
+<td>否</td>
+<td>0</td>
+<td>最小处理伪类宽</td>
+</tr>
+</tbody></table>
+<p>例如添加 skeleton.config.json，生成考拉首页在 iphone X 下的骨架屏。</p>
+<pre><code class="json">{
+  "pageName": "baidu",
+  "pageUrl": "https://www.kaola.com",
+  "openRepeatList": false,
+  "device": "iPhone X",
+  "minGrayBlockWidth": 80,
+  "minGrayPseudoWidth": 10,
+  "debug": true,
+  "debugTime": 3000
+}
+</code></pre>
+<h2 id="4-2-一键生成骨架屏"><a href="#4-2-一键生成骨架屏" class="headerlink" title="4.2 一键生成骨架屏"></a>4.2 一键生成骨架屏</h2><pre><code class="javascript">skeleton -c ./skeleton.config.json</code></pre>
+<p>页面 DomReady 之后，会在页面顶部出现红色按钮：开始生成骨架屏。</p>
+<p>生成完成后，会在运行目录生成 skeleton-output 文件件，里面包括骨架屏 png 图片、base64 文本、html 文件：</p>
+<ul>
+<li>base64-baidu.png # 骨架图图片</li>
+<li>base64-baidu.txt # 骨架图 Base64 编码</li>
+<li>base64-baidu.html # 最终生成 HTML</li>
+</ul>
+<p>其中 html 文件可以直接拿来用，复制下面位置：</p>
+<pre><code class="html">
+  
+    <!--- 骨架屏代码 -->
+  
+</code></pre>
+<p>注意：</p>
+<ul>
+<li>骨架图默认在 onload 事件后销毁。</li>
+<li>手动销毁方式：<code>javascript window.SKELETON && SKELETON.destroy();</code> 当然，你也可以在项目中直接使用生成的 Base64 图片。</li>
+</ul>
+<h2 id="4-3-解决登录问题"><a href="#4-3-解决登录问题" class="headerlink" title="4.3 解决登录问题"></a>4.3 解决登录问题</h2><p>如果页面需要登录，则需要下载 Chrome 插件 EditThisCookie，将 Cookie 复制到配置参数中。Puppeteer 通过在打开页面的时候注入 Cookie 从而模拟登录态：</p>
+<pre><code class="javascript">// Write cookies to solve the login status problem
+if (options.cookies && options.cookies.length) {
+  await page.setCookie(...options.cookies);
+  await page.cookies(options.pageUrl);
+  await sleep(1000);
+}</code></pre>
+<h2 id="4-4-DOM-节点配置"><a href="#4-4-DOM-节点配置" class="headerlink" title="4.4 DOM 节点配置"></a>4.4 DOM 节点配置</h2><p>这是获取优质骨架图的要点，通过设置以下几个 dom 节点属性，在骨架图中对某些节点进行移除、忽略和指定背景色的操作，去除冗余节点的干扰，从而使得骨架图效果达到最佳。</p>
+<table>
+<thead>
+<tr>
+<th>参数名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>data-skeleton-remove</td>
+<td>指定进行移除的 dom 节点属性</td>
+</tr>
+<tr>
+<td>data-skeleton-bgcolor</td>
+<td>指定在某 dom 节点中添加的背景色</td>
+</tr>
+<tr>
+<td>data-skeleton-ignore</td>
+<td>指定忽略不进行任何处理的 dom 节点属性</td>
+</tr>
+<tr>
+<td>data-skeleton-empty</td>
+<td>将某dom的innerHTML置为空字符串</td>
+</tr>
+</tbody></table>
+<p>示例：</p>
+<pre><code><div data-skeleton-remove>
+    <span>abc</span>
+</div>
+<div data-skeleton-bgcolor="#EE00EE">
+    <span>abc</span>
+</div>
+<div data-skeleton-ignore>
+    <span>abc</span>
+</div>
+<div data-skeleton-empty>
+    <span>abc</span>
+</div></code></pre><h1 id="5-开发骨架屏生成平台"><a href="#5-开发骨架屏生成平台" class="headerlink" title="5. 开发骨架屏生成平台"></a>5. 开发骨架屏生成平台</h1><p>有了骨架屏生成工具，我们可以非常方便的接入第三方平台，例如我们使用 egg.js 开发骨架屏生成平台，用户输入页面链接，自动生成对应骨架屏。关键代码：</p>
+<pre><code class="javascript">const getSkeleton = require('awesome-skeleton');
+class SkeletonService extends Service {
+  async generator(params) {
+    try {
+      const result = await getSkeleton(params);
+      return {
+        success: true,
+        ...result,
+      };
+    } catch (e) {
+            ...
+    }
+  }
+}
+
+</code></pre>
+<p>页面效果：</p>
+<p><a href="./4.jpg" data-fancybox="group" data-caption="img" class="fancybox"><img alt="img" title="img" data-src="./4.jpg" class="lazyload"></a></p>
+<p>骨架屏配置：</p>
+<p><a href="./5.jpg" data-fancybox="group" data-caption="img" class="fancybox"><img alt="img" title="img" data-src="./5.jpg" class="lazyload"></a></p>
+<h1 id="6-参与贡献"><a href="#6-参与贡献" class="headerlink" title="6. 参与贡献"></a>6. 参与贡献</h1><p>Github：<a href="https://github.com/kaola-fed/awesome-skeleton" target="_blank" rel="noopener">https://github.com/kaola-fed/awesome-skeleton</a></p>
+</body></html></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:live_devOps@163.com">YoungBoy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://it-ing.cn/2020/03/25/Front-End-Skeleton/">http://it-ing.cn/2020/03/25/Front-End-Skeleton/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://it-ing.cn">汀</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%AA%A8%E6%9E%B6%E5%B1%8F/">骨架屏    </a><a class="post-meta__tags" href="/tags/node/">node    </a></div><div class="post_share"><div class="social-share" data-image="https://ss0.bdstatic.com/70cFuHSh_Q1YnxGkpoWK1HF6hhy/it/u=1912403690,2623160076&amp;fm=26&amp;gp=0.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/wechat.jpg" alt="微信"><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/alipay.jpg" alt="支付寶"><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/03/30/flutter-dev-standard/"><img class="prev_cover lazyload" data-src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/top_img/default.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>Flutter-Template开发规范(Flutter-go)</span></div></a></div><div class="next-post pull_right"><a href="/2020/03/24/TypeScript-GetObjectPrpos/"><img class="next_cover lazyload" data-src="https://goss3.cfp.cn/creative/vcg/veer/nowarter800/new/VCG41N514576868.jpg?x-oss-process=image/format,webp" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>舒适访问对象深层次属性~</span></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="lv-container" data-id="city" data-uid="MTAyMC8zOTA5NS8xNTYyMg=="><script>(function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+})(document, 'script');</script></div></div></div></main><footer id="footer" style="background-image: url(https://goss1.cfp.cn/creative/vcg/veer/400/new/VCG41N680280554.jpg?x-oss-process=image/format,webp)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2020</div><div class="framework-info"><span>Power By</span><a href="https://github.com/by1773" target="_blank" rel="noopener"></a><span class="footer-separator">YoungBoy</span></div><div class="footer_custom_text">既然来了,就别着急走哇~</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/fireworks.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/canvas-nest.js"></script><script src="https://cdn.jsdelivr.net/npm/activate-power-mode/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true; 
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><script src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/ClickShowText.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
