@@ -1,0 +1,452 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"><title>前端换肤的N种方案，请收下 | X</title><meta name="description" content="前端换肤的N种方案，请收下"><meta name="keywords" content="CSS"><meta name="author" content="YoungBoy,live_devOps@163.com"><meta name="copyright" content="YoungBoy"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="https://hm.baidu.com"><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="前端换肤的N种方案，请收下"><meta name="twitter:description" content="前端换肤的N种方案，请收下"><meta name="twitter:image" content="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/1.png"><meta property="og:type" content="article"><meta property="og:title" content="前端换肤的N种方案，请收下"><meta property="og:url" content="http://it-ing.cn/2020/05/08/Front-End-CSS/"><meta property="og:site_name" content="X"><meta property="og:description" content="前端换肤的N种方案，请收下"><meta property="og:image" content="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/1.png"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
+
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="http://it-ing.cn/2020/05/08/Front-End-CSS/"><link rel="prev" title="瞧!技术汇总" href="http://it-ing.cn/2020/05/14/it-summary/"><link rel="next" title="GitHub 精选前端项目" href="http://it-ing.cn/2020/04/29/resourseTip/"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?6a06f2b8965e4ca4e8449e48f4646237";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"title":"Snackbar.bookmark.title","message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  isHome: false,
+  isPost: true
+  
+}</script><meta name="generator" content="Hexo 4.2.0"></head><body><canvas class="fireworks"></canvas><header> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">X</a></span><span class="toggle-menu pull_right close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-heartbeat" aria-hidden="true"></i><span> 清单</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 照片</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/book/"><i class="fa-fw fa fa-book"></i><span> 书籍</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fa-fw fa fa-coffee"></i><span> 留言板</span></a></div></div></span><span class="pull_right" id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div></header><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">29</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">34</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">18</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-heartbeat" aria-hidden="true"></i><span> 清单</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 照片</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/book/"><i class="fa-fw fa fa-book"></i><span> 书籍</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fa-fw fa fa-coffee"></i><span> 留言板</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><div class="sidebar-toc__content"><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#前端换肤的N种方案，请收下"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">前端换肤的N种方案，请收下</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#覆盖样式实现"><span class="toc_mobile_items-number">1.1.</span> <span class="toc_mobile_items-text">覆盖样式实现</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#sass变量实现"><span class="toc_mobile_items-number">1.2.</span> <span class="toc_mobile_items-text">sass变量实现</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#生成多套皮肤css"><span class="toc_mobile_items-number">1.3.</span> <span class="toc_mobile_items-text">生成多套皮肤css</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#CSS变量实现"><span class="toc_mobile_items-number">1.4.</span> <span class="toc_mobile_items-text">CSS变量实现</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#CSS变量兼容性实现-1"><span class="toc_mobile_items-number">1.5.</span> <span class="toc_mobile_items-text">CSS变量兼容性实现-1</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#CSS变量兼容性实现-2"><span class="toc_mobile_items-number">1.6.</span> <span class="toc_mobile_items-text">CSS变量兼容性实现-2</span></a></li></ol></li></ol></div></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#前端换肤的N种方案，请收下"><span class="toc-number">1.</span> <span class="toc-text">前端换肤的N种方案，请收下</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#覆盖样式实现"><span class="toc-number">1.1.</span> <span class="toc-text">覆盖样式实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#sass变量实现"><span class="toc-number">1.2.</span> <span class="toc-text">sass变量实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#生成多套皮肤css"><span class="toc-number">1.3.</span> <span class="toc-text">生成多套皮肤css</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS变量实现"><span class="toc-number">1.4.</span> <span class="toc-text">CSS变量实现</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS变量兼容性实现-1"><span class="toc-number">1.5.</span> <span class="toc-text">CSS变量兼容性实现-1</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#CSS变量兼容性实现-2"><span class="toc-number">1.6.</span> <span class="toc-text">CSS变量兼容性实现-2</span></a></li></ol></li></ol></div></div></div><main id="content-outer"><div id="top-container" style="background-image: url(https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/1.png)"><div id="post-info"><div id="post-title"><div class="posttitle">前端换肤的N种方案，请收下</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 发表于 2020-05-08<span class="post-meta__separator">|</span><i class="fa fa-history fa-fw" aria-hidden="true"></i> 更新于 2020-05-08</time><span class="post-meta__separator">|</span><span><i class="fa fa-inbox post-meta__icon fa-fw" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></span><div class="post-meta-wordcount"><i class="fa fa-file-word-o post-meta__icon fa-fw" aria-hidden="true"></i><span>字数总计:</span><span class="word-count">2.5k</span><span class="post-meta__separator">|</span><i class="fa fa-clock-o post-meta__icon fa-fw" aria-hidden="true"></i><span>阅读时长: 9 分钟</span><div class="post-meta-pv-cv"><span class="post-meta__separator">|</span><span><i class="fa fa-eye post-meta__icon fa-fw" aria-hidden="true"> </i>阅读量:</span><span id="busuanzi_value_page_pv"></span></div></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><html><head></head><body><h2 id="前端换肤的N种方案，请收下"><a href="#前端换肤的N种方案，请收下" class="headerlink" title="前端换肤的N种方案，请收下"></a>前端换肤的N种方案，请收下</h2><h3 id="覆盖样式实现"><a href="#覆盖样式实现" class="headerlink" title="覆盖样式实现"></a>覆盖样式实现</h3><hr>
+<pre><code>// light
+$color-brand1: #ffcd32;
+$fill-1: #fff !default;
+$color-text: #3c3c3c;
+$color-text-1: #757575;
+$color-text-2: #222;
+
+// dark
+$dark-fill-1: #222 !default; // 品牌色
+$dark-color-text: #fff;
+$dark-color-text-1: rgba(255, 255, 255, 0.3);
+$dark-color-text-2: $color-brand1;
+// 页面使用
+<style lang="scss">
+@import "./assets/scss/index.scss";
+
+[data-theme="dark"] {
+  body {
+    background: $dark-fill-1;
+  }
+  .reaconmend .reaconmend-list .item .name {
+    color: $dark-color-text;
+  }
+  .reaconmend .reaconmend-list .item .desc {
+    color: $dark-color-text-1;
+  }
+  .header .text {
+    color: $dark-color-text-2;
+  }
+}
+</style></code></pre><p>利用css优先级的原理覆盖掉原有样式的实现，每定义一套皮肤就要定义对应的sass变量，以及定义一套覆盖原有样式的皮肤样式。如果有多套皮肤的话，覆盖的代码量就会n套。</p>
+<p><strong>缺点：</strong> 样式不易管理，查找样式复杂，开发效率低，拓展性差，维护成本高，多人协作沟通麻烦。</p>
+<h3 id="sass变量实现"><a href="#sass变量实现" class="headerlink" title="sass变量实现"></a>sass变量实现</h3><hr>
+<pre><code>// variable.scss  
+
+// 浅色
+$colors-light: (
+  fill-1: #fff,
+  text: #3c3c3c,
+  text-1: #757575,
+  text-2: #222,
+);
+
+// 深色
+$colors-dark: (
+  fill-1: #222,
+  text: #fff,
+  text-1: rgba(255, 255, 255, 0.3),
+  text-2: #ffcd32,
+);
+// mixin.scss
+// 背景色
+@mixin bg-color($key) {
+  background-color: map-get($colors-light, $key);
+  [data-theme="dark"] & {
+    background-color: map-get($colors-dark, $key);
+  }
+}
+// text色
+@mixin text-color($key) {
+  color: map-get($colors-light, $key);
+  [data-theme="dark"] & {
+    color: map-get($colors-dark, $key);
+  }
+}
+// 页面使用
+
+<style lang="scss" rel="stylesheet/scss">
+@import "../../../assets/scss/variable.scss";
+@import "../../../assets/scss/mixin.scss";
+.reaconmend-list {
+    .list-title {
+      height: 40px;
+      line-height: 40 px;
+      text-align: center;
+        @include text-color(text-1);
+    }
+}
+</style></code></pre><p>如上所示用到的知识点包含Sass变量（variable），嵌套（nestend rules），混合（mixins）， Sass Maps的函数-map-get(key)。</p>
+<blockquote>
+<p>Maps的含义：Maps可视为键值对的集合，键被用于定位值 在css种没有对应的概念。和Lists不同Maps必须被圆括号包围，键值对被都好分割 。Maps中的keys和values可以是sassscript的任何对象。（包括任意的sassscript表达式 arbitrary SassScript expressions） 和Lists一样Maps主要为sassscript函数服务，如 map-get函数用于查找键值，map-merge函数用于map和新加的键值融合，@each命令可添加样式到一个map中的每个键值对。Maps可用于任何Lists可用的地方，在List函数中 Map会被自动转换为List ， 如 (key1: value1, key2: value2)会被List函数转换为 key1 value1, key2 value2 ，反之则不能。(网友Soledad提供)</p>
+</blockquote>
+<p><strong>使用scss变量换肤相比覆盖样式</strong></p>
+<ul>
+<li>拓展性更强</li>
+<li>将换肤的逻辑进行了收敛</li>
+</ul>
+<h3 id="生成多套皮肤css"><a href="#生成多套皮肤css" class="headerlink" title="生成多套皮肤css"></a>生成多套皮肤css</h3><hr>
+<p>使用覆盖样式实现与scss变量实现会把多套皮肤的样式都编译到一个css文件里面，如果有多套皮肤样式，这个文件是会非常大的。为了解决这样的问题，就自然的想出了拆分scss的实现：</p>
+<p>实现方案，通过编译工具与构建工具编译出多套皮肤css，通过js动态的link对应的皮肤样式</p>
+<pre><code>// js动态处理
+ var theme = /\bt=(\w+)/.exec(location.search);
+ theme = theme ? theme[1] : "light";
+
+ changeTheme(theme);
+
+function changeTheme(theme) {
+    var head = document.getElementsByTagName("head")[0];
+    var link = document.createElement("link");
+    link.dataset.type = "theme";
+    link.href = "assets/css/theme-" + theme + "/pages/home/home.css";
+    link.rel = "stylesheet";
+    link.type = "text/css";
+    head.appendChild(link);
+}</code></pre><h3 id="CSS变量实现"><a href="#CSS变量实现" class="headerlink" title="CSS变量实现"></a>CSS变量实现</h3><hr>
+<pre><code>// variable.scss
+// 默认变量
+:root {
+  --fill-1: #fff;
+  --text: #3c3c3c;
+  --text-1: #757575;
+  --text-2: #222;
+
+  --font-size-large: 18px;
+  --font-size-large-x: 22px;
+  --font-size-medium: 14px;
+  --font-size-medium-x: 16px;
+  --font-size-small-s: 10px;
+  --font-size-small: 12px;
+}
+// 深色变量
+[data-theme="dark"] {
+  --fill-1: #222;
+  --text: #fff;
+  --text-1: rgba(255, 255, 255, 0.3);
+  --text-2: #ffcd32;
+}</code></pre><p>在页面对css变量做引入使用</p>
+<pre><code>// 页面使用
+@import "../../assets/scss/variable.scss";
+
+.header {
+  position: relative;
+  height: 70px;
+  text-align: center;
+  font-size: 0; 
+  .text {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 70px;
+    font-size: var(--font-size-large);
+    color: var(--text-2);
+  }
+}</code></pre><p>具体的实现效果：<a href="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/2.gif" target="_blank" rel="noopener" data-fancybox="group" data-caption="img" class="fancybox"><img alt="img" title="img" data-src="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/2.gif" class="lazyload"></a></p>
+<blockquote>
+<p>问题点：css变量会存在兼容性问题</p>
+</blockquote>
+<p>css变量兼容性如下：<a href="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/3.png" target="_blank" rel="noopener" data-fancybox="group" data-caption="img" class="fancybox"><img alt="img" title="img" data-src="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/3.png" class="lazyload"></a><br>虽然现在大部分主流浏览器都可以兼容，但是还要考虑更多的兼容性这块的请往下看：</p>
+<h3 id="CSS变量兼容性实现-1"><a href="#CSS变量兼容性实现-1" class="headerlink" title="CSS变量兼容性实现-1"></a>CSS变量兼容性实现-1</h3><hr>
+<blockquote>
+<p>在css变量的基础上新增了postcss-custom-properties这个插件 安装依赖：npm install postcss-custom-properties –save-dev npm install postcss-loader –save-dev</p>
+</blockquote>
+<p>在根目录新建postcss.config.js增加配置，配置如下：</p>
+<pre><code>const postcssCustompProperties = require("postcss-custom-properties");
+
+module.exports = {
+  plugins: [
+    postcssCustompProperties({
+      importFrom: "src/assets/scss/variable.scss"
+    })
+  ]
+};</code></pre><p>postcss 会将css自定义变量直接编译为<code>确定值</code>，而<code>不是保留</code>。这时就需要 <code>postcss 插件</code> 来为我们保留这些自定义变量，使用 postcss-custom-properties效果如下：<a href="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/4.webp" target="_blank" rel="noopener" data-fancybox="group" data-caption="img" class="fancybox"><img alt="img" title="img" data-src="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/4.webp" class="lazyload"></a></p>
+<ul>
+<li>优点：会生成一套与css变量对应的css</li>
+<li>缺点：在构建时根据css变量生成对应的css，换肤是运行时并不能生成对应的css。</li>
+</ul>
+<p>换肤后样式：</p>
+<p><a href="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/5.png" target="_blank" rel="noopener" data-fancybox="group" data-caption="img" class="fancybox"><img alt="img" title="img" data-src="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/5.png" class="lazyload"></a></p>
+<h3 id="CSS变量兼容性实现-2"><a href="#CSS变量兼容性实现-2" class="headerlink" title="CSS变量兼容性实现-2"></a>CSS变量兼容性实现-2</h3><hr>
+<p>首先需要建一个存放公共css变量的js文件，将需要定义的css变量存放到该js文件，例如（variable.js）</p>
+<pre><code>// variable.js
+
+// 字体变量
+const baseSize = {
+  "--font-size-large-x": "22px",
+  "--font-size-large": "18px",
+  "--font-size-medium": "14px",
+  "--font-size-medium-x": "16px",
+  "--font-size-small-s": "10px",
+  "--font-size-small": "12px",
+};
+
+//浅色
+export const lightTheme = {
+  "--fill-1": "#fff",
+  "--text": "#3c3c3c",
+  "--text-1": "#757575",
+  "--text-2": "#222",
+  ...baseSize,
+};
+
+// 深色
+export const darkTheme = {
+  "--fill-1": "#222",
+  "--text": "#fff",
+  "--text-1": "rgba(255, 255, 255, 0.3)",
+  "--text-2": "#ffcd32",
+  ...baseSize,
+};</code></pre><p>页面使用css变量，例如：</p>
+<pre><code><style lang="scss">
+ .text {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 70px;
+    font-size: var(--font-size-large);
+    color: var(--text-2);
+  }
+</style></code></pre><p>安装css-vars-ponyfill 插件</p>
+<blockquote>
+<p><strong>css-vars-ponyfill</strong>官方概念：在传统浏览器和现代浏览器中为CSS自定义属性(又名“CSS变量”)提供客户端支持的ponyfill。（具体用法与概念请查阅官方网站：<strong>css-vars-ponyfill</strong>）</p>
+</blockquote>
+<p>封装切换主题的js，在main.js做初始化调用</p>
+<pre><code>// theme.js
+import { lightTheme, darkTheme } from "../src/assets/js/variable";
+import cssVars from "css-vars-ponyfill";
+export const initTheme = (theme) => {
+  document.documentElement.setAttribute("data-theme", theme ? "light" : "dark");
+  cssVars({
+    watch: true, // 当添加，删除或修改其<link>或<style>元素的禁用或href属性时，ponyfill将自行调用
+    variables: theme ? lightTheme : darkTheme, // variables 自定义属性名/值对的集合
+    onlyLegacy: false, // false  默认将css变量编译为浏览器识别的css样式  true 当浏览器不支持css变量的时候将css变量编译为识别的css
+  });
+};</code></pre><p><img src="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/5.webp" alt="img"><br>在切换主题的按钮组件中调用!<br><a href="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/6.png" target="_blank" rel="noopener">img</a></p>
+<p>总结：css自定义属性 + css-vars-ponyfill(解决兼容性) 预览效果!<br><a href="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/7.gif" target="_blank" rel="noopener">img</a></p>
+<blockquote>
+<p>细心的小伙伴们，一定发现了这里的css变量已经编译成浏览器可识别的css样式了。</p>
+</blockquote>
+<h3 id="ElementUI实现"><a href="#ElementUI实现" class="headerlink" title="ElementUI实现"></a>ElementUI实现</h3><hr>
+<p>官方的实现解释</p>
+<ul>
+<li>先把默认主题文件中涉及到颜色的 CSS 值替换成关键词：github.com/ElementUI/t…</li>
+<li>根据用户选择的主题色生成一系列对应的颜色值：github.com/ElementUI/t…</li>
+<li>把关键词再换回刚刚生成的相应的颜色值：github.com/ElementUI/t…</li>
+<li>直接在页面上加 <code>style</code> 标签，把生成的样式填进去：github.com/ElementUI/t…</li>
+</ul>
+<p>已实现的链接参考：<a href="https://juejin.im/post/5ca41617f265da3092006155#heading-1" target="_blank" rel="noopener">https://juejin.im/post/5ca41617f265da3092006155#heading-1</a></p>
+<h3 id="less在线编译实现"><a href="#less在线编译实现" class="headerlink" title="less在线编译实现"></a>less在线编译实现</h3><hr>
+<p>根据<strong>less</strong>可以直接 编译<strong>less变量</strong>实现的步骤如下：</p>
+<pre><code>// variable.less 定义less变量
+// 公共字体
+@font-size-large-x: 22px;
+@font-size-large: 18px;
+@font-size-medium: 14px;
+@font-size-medium-x: 16px;
+@font-size-small-s: 10px;
+@font-size-small: 12px;
+
+// 浅色
+@fill-1: #fff;
+@text: #3c3c3c;
+@text-1: #757575;
+@text-2: #222;
+
+// 页面使用 例如：
+// 下面.text的css 如下，这里的 @font-size-large 和  @text-2就是 less 变量：
+.text {
+    display: inline-block;
+    vertical-align: top;
+    line-height: 70px;
+    font-size: @font-size-large;
+    color: @text-2;
+  }</code></pre><p>当点击换肤按钮的时候，直接去加载 <code>less.js</code>，具体代码如下:</p>
+<pre><code><template>
+  <div class="header">
+    <div class="text">小恐龙换肤</div>
+    <div role="switch" class="switch" :class="theme === true ? 'is-checked' : ''">
+      <input type="checkbox" class="switch-input" />
+      <span class="switch-core" @click="changeTheme"></span>
+    </div>
+  </div>
+</template>
+
+<script>
+import { lightTheme, darkTheme } from "../../assets/js/variable";
+export default {
+  name: "m-header",
+  data() {
+    return {
+      theme: true
+    };
+  },
+  methods: {
+    changeTheme() {
+      this.theme = !this.theme;
+      // 调用 `less.modifyVars` 方法来改变变量值
+      window.less.modifyVars(this.theme ? lightTheme : darkTheme);
+    }
+  },
+  mounted() {}
+};
+</script></code></pre><p>定义variable.js是因为如果直接将less变量放在modifyVars中切换的效果只会生效一次，所以根据切换的状态使用对应的less变量。</p>
+<pre><code>//浅色
+export const lightTheme = {
+  "@fill-1": "#fff",
+  "@text": "#3c3c3c",
+  "@text-1": "#757575",
+  "@text-2": "#222",
+};
+
+// 深色
+export const darkTheme = {
+  "@fill-1": "#222",
+  "@text": "#fff",
+  "@text-1": "rgba(255, 255, 255, 0.3)",
+  "@text-2": "#ffcd32",
+};</code></pre><p>然后点击色块进行试验，发现并没有生效，这是why？然后就去看了其文档，原来它会找到所有如下的less 样式标签，并且使用已编译的css同步创建 style 标签。也就是说我们必须吧代码中所有的less 都以下面这种link的方式来引入，这样<code>less.js</code> 才能在浏览器端实现编译。</p>
+<blockquote>
+<p>``</p>
+</blockquote>
+<p>这里我用了vue，所以直接把 <code>less</code> 文件放在了<code>public</code>目录下，然后在html中直接引入：<br><img src="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/8.webp" alt="img"><br><img src="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/9.webp" alt="img"></p>
+<p><img src="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/10.webp" alt="img"><br>点击切换按钮，可见background和color确实都变了<br><img src="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/11.webp" alt="img"><br><img src="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/12.webp" alt="img"></p>
+<blockquote>
+<p>注：使用less 来实现换肤要注意 <code>less 文件</code>在 <code>html</code> 中编写的位置，不然很可能被其他css 文件所干扰导致换肤失败。如果less文件特别大，会存在编译性能问题。</p>
+</blockquote>
+<h3 id="拓展-图片切换"><a href="#拓展-图片切换" class="headerlink" title="拓展-图片切换"></a>拓展-图片切换</h3><hr>
+<p>以上的方案—只是对background-color和color进行的换肤，如果要对图片进行换肤该怎么办呐？                   </p>
+<p><strong>图片切换</strong></p>
+<p>项目中还存在很多占位图或者其他图片会随着主题的变化而变化。通过引入所有图片，并用文件名来区分不同主题所对应的图片。在点击切换主题时，切换到主题所对应的文件，就能实现图片切换了。</p>
+<blockquote>
+<img class :src="avatar" alt>
+</blockquote>
+<pre><code>// 页面实现
+<template>
+  <div class="header">
+    <div class="text">小恐龙换肤</div>
+    <div role="switch" class="switch" :class="theme === true ? 'is-checked' : ''">
+      <input type="checkbox" class="switch-input" />
+      <span class="switch-core" @click="changeTheme"></span>
+    </div>
+  </div>
+</template>
+<script>
+import { initTheme } from "../../theme";
+import bus from "../../bus";
+export default {
+  name: "m-header",
+  data() {
+    return {
+      theme: true, // false深色主题
+      avatar: ""
+    };
+  },
+  methods: {
+    changeTheme() {
+      this.theme = !this.theme;
+      initTheme(this.theme);
+      this.setThemeValue(this.theme);
+      bus.$emit("changeTheme", this.theme);
+    },
+    setThemeValue(theme) {
+      theme = theme ? "light" : "dark";
+      this.avatar = require(`@/assets/images/logo-${theme}.jpeg`);
+    }
+  },
+  created() {
+    this.setThemeValue(this.theme);
+  }
+};
+</script></code></pre><p>在点击切换主题时，会发射一个 <code>changeTheme</code> 事件，各组件接收到 <code>changeTheme</code> 事件，就会为图片重新赋值，也就达到了切换图片的效果。</p>
+<p><img src="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/13.gif" alt="img"></p>
+<h3 id="最后"><a href="#最后" class="headerlink" title="最后"></a>最后</h3><hr>
+<p>很感谢能在百忙中抽出时间把这篇文章看完的小伙伴:) 如果还有什么疑问或者建议，可以多多交流，原创文章，文笔有限，才疏学浅，文中若有不正之处，万望告知。好了，本文到此结束，希望对你有帮助 :)</p>
+</body></html></style></code></pre></body></html></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:live_devOps@163.com">YoungBoy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://it-ing.cn/2020/05/08/Front-End-CSS/">http://it-ing.cn/2020/05/08/Front-End-CSS/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://it-ing.cn">X</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/CSS/">CSS    </a></div><div class="post_share"><div class="social-share" data-image="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/1.png" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/wechat.jpg" alt="微信"><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/alipay.jpg" alt="支付寶"><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="prev-post pull_left"><a href="/2020/05/14/it-summary/"><img class="prev_cover lazyload" data-src="//goss.cfp.cn/creative/vcg/nowarter800/new/VCG41N940143972.jpg" onerror="onerror=null;src='/img/404.jpg'"><div class="label">上一篇</div><div class="prev_info"><span>瞧!技术汇总</span></div></a></div><div class="next-post pull_right"><a href="/2020/04/29/resourseTip/"><img class="next_cover lazyload" data-src="https://desktop.github.com/images/desktop-icon.svg" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>GitHub 精选前端项目</span></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="lv-container" data-id="city" data-uid="MTAyMC8zOTA5NS8xNTYyMg=="><script>(function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+})(document, 'script');</script></div></div></div></main><footer id="footer" style="background-image: url(https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/1.png)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2020</div><div class="framework-info"><span>Power By</span><a href="https://github.com/by1773" target="_blank" rel="noopener"></a><span class="footer-separator">YoungBoy</span></div><div class="footer_custom_text">既然来了,就别着急走哇~</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/fireworks.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/canvas-nest.js"></script><script src="https://cdn.jsdelivr.net/npm/activate-power-mode/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true; 
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><script src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/ClickShowText.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"mobile":{"show":false},"model":{"jsonPath":"/live2dw/assets/Epsilon2.1.model.json"},"display":{"position":"left","width":150,"height":300},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>

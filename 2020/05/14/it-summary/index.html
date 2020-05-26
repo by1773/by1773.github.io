@@ -1,0 +1,711 @@
+<!DOCTYPE html><html lang="zh-CN" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5"><title>瞧!技术汇总 | X</title><meta name="description" content="瞧!技术汇总"><meta name="keywords" content="整理"><meta name="author" content="YoungBoy,live_devOps@163.com"><meta name="copyright" content="YoungBoy"><meta name="format-detection" content="telephone=no"><link rel="shortcut icon" href="/img/favicon.ico"><link rel="preconnect" href="//cdn.jsdelivr.net"><link rel="preconnect" href="https://hm.baidu.com"><link rel="preconnect" href="https://fonts.googleapis.com" crossorigin><link rel="preconnect" href="//busuanzi.ibruce.info"><meta name="twitter:card" content="summary"><meta name="twitter:title" content="瞧!技术汇总"><meta name="twitter:description" content="瞧!技术汇总"><meta name="twitter:image" content="http://it-ing.cn//goss.cfp.cn/creative/vcg/nowarter800/new/VCG41N940143972.jpg"><meta property="og:type" content="article"><meta property="og:title" content="瞧!技术汇总"><meta property="og:url" content="http://it-ing.cn/2020/05/14/it-summary/"><meta property="og:site_name" content="X"><meta property="og:description" content="瞧!技术汇总"><meta property="og:image" content="http://it-ing.cn//goss.cfp.cn/creative/vcg/nowarter800/new/VCG41N940143972.jpg"><meta http-equiv="Cache-Control" content="no-transform"><meta http-equiv="Cache-Control" content="no-siteapp"><script src="https://cdn.jsdelivr.net/npm/js-cookie/dist/js.cookie.min.js"></script><script>const autoChangeMode = 'false'
+var t = Cookies.get("theme");
+if (autoChangeMode == '1'){
+const isDarkMode = window.matchMedia("(prefers-color-scheme: dark)").matches
+const isLightMode = window.matchMedia("(prefers-color-scheme: light)").matches
+const isNotSpecified = window.matchMedia("(prefers-color-scheme: no-preference)").matches
+const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+if (t === undefined){
+  if (isLightMode) activateLightMode()
+  else if (isDarkMode) activateDarkMode()
+  else if (isNotSpecified || hasNoSupport){
+    console.log('You specified no preference for a color scheme or your browser does not support it. I Schedule dark mode during night time.')
+    now = new Date();
+    hour = now.getHours();
+    isNight = hour < 6 || hour >= 18
+    isNight ? activateDarkMode() : activateLightMode()
+}
+} else if (t == 'light') activateLightMode()
+else activateDarkMode()
+
+
+} else if (autoChangeMode == '2'){
+  now = new Date();
+  hour = now.getHours();
+  isNight = hour < 6 || hour >= 18
+  if(t === undefined) isNight? activateDarkMode() : activateLightMode()
+  else if (t === 'light') activateLightMode()
+  else activateDarkMode() 
+} else {
+  if ( t == 'dark' ) activateDarkMode()
+  else if ( t == 'light') activateLightMode()
+}
+
+function activateDarkMode(){
+  document.documentElement.setAttribute('data-theme', 'dark')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+    document.querySelector('meta[name="theme-color"]').setAttribute('content','#000')
+  }
+}
+function activateLightMode(){
+  document.documentElement.setAttribute('data-theme', 'light')
+  if (document.querySelector('meta[name="theme-color"]') !== null){
+  document.querySelector('meta[name="theme-color"]').setAttribute('content','#fff')
+  }
+}</script><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/font-awesome@latest/css/font-awesome.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.css"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.css"><link rel="canonical" href="http://it-ing.cn/2020/05/14/it-summary/"><link rel="next" title="前端换肤的N种方案，请收下" href="http://it-ing.cn/2020/05/08/Front-End-CSS/"><script>var _hmt = _hmt || [];
+(function() {
+  var hm = document.createElement("script");
+  hm.src = "https://hm.baidu.com/hm.js?6a06f2b8965e4ca4e8449e48f4646237";
+  var s = document.getElementsByTagName("script")[0]; 
+  s.parentNode.insertBefore(hm, s);
+})();
+</script><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Titillium+Web"><script>var GLOBAL_CONFIG = { 
+  root: '/',
+  algolia: undefined,
+  localSearch: {"path":"search.xml","languages":{"hits_empty":"找不到您查询的内容:${query}"}},
+  translate: {"defaultEncoding":2,"translateDelay":0,"cookieDomain":"https://xxx/","msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简"},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  bookmark: {
+    title: 'Snackbar.bookmark.title',
+    message_prev: '按',
+    message_next: '键将本页加入书签'
+  },
+  runtime_unit: '天',
+  runtime: true,
+  copyright: undefined,
+  ClickShowText: {"text":"富强,民主,文明,和谐,自由,平等,公正,法治,爱国,敬业,诚信,友善","fontSize":"15px"},
+  medium_zoom: false,
+  fancybox: true,
+  Snackbar: {"bookmark":{"title":"Snackbar.bookmark.title","message_prev":"按","message_next":"键将本页加入书签"},"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#49b1f5","bgDark":"#2d3035","position":"bottom-left"},
+  baiduPush: false,
+  isHome: false,
+  isPost: true
+  
+}</script><meta name="generator" content="Hexo 4.2.0"></head><body><canvas class="fireworks"></canvas><header> <div id="page-header"><span class="pull_left" id="blog_name"><a class="blog_title" id="site-name" href="/">X</a></span><span class="toggle-menu pull_right close"><a class="site-page"><i class="fa fa-bars fa-fw" aria-hidden="true"></i></a></span><span class="pull_right menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-heartbeat" aria-hidden="true"></i><span> 清单</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 照片</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/book/"><i class="fa-fw fa fa-book"></i><span> 书籍</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fa-fw fa fa-coffee"></i><span> 留言板</span></a></div></div></span><span class="pull_right" id="search_button"><a class="site-page social-icon search"><i class="fa fa-search fa-fw"></i><span> 搜索</span></a></span></div></header><div id="mobile-sidebar"><div id="menu_mask"></div><div id="mobile-sidebar-menus"><div class="mobile_author_icon"><img class="avatar-img" src="/img/avatar.png" onerror="onerror=null;src='/img/friend_404.gif'" alt="avatar"></div><div class="mobile_post_data"><div class="mobile_data_item is-center"><div class="mobile_data_link"><a href="/archives/"><div class="headline">文章</div><div class="length_num">29</div></a></div></div><div class="mobile_data_item is-center">      <div class="mobile_data_link"><a href="/tags/"><div class="headline">标签</div><div class="length_num">34</div></a></div></div><div class="mobile_data_item is-center">     <div class="mobile_data_link"><a href="/categories/"><div class="headline">分类</div><div class="length_num">18</div></a></div></div></div><hr><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><i class="fa-fw fa fa-home"></i><span> 首页</span></a></div><div class="menus_item"><a class="site-page" href="/archives/"><i class="fa-fw fa fa-archive"></i><span> 时间轴</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><i class="fa-fw fa fa-tags"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><i class="fa-fw fa fa-folder-open"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page"><i class="fa-fw fa fa-heartbeat" aria-hidden="true"></i><span> 清单</span><i class="fa fa-chevron-down menus-expand" aria-hidden="true"></i></a><ul class="menus_item_child"><li><a class="site-page" href="/music/"><i class="fa-fw fa fa-music"></i><span> 音乐</span></a></li><li><a class="site-page" href="/Gallery/"><i class="fa-fw fa fa-picture-o"></i><span> 照片</span></a></li><li><a class="site-page" href="/movies/"><i class="fa-fw fa fa-film"></i><span> 电影</span></a></li></ul></div><div class="menus_item"><a class="site-page" href="/book/"><i class="fa-fw fa fa-book"></i><span> 书籍</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><i class="fa-fw fa fa-link"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><i class="fa-fw fa fa-heart"></i><span> 关于</span></a></div><div class="menus_item"><a class="site-page" href="/message/"><i class="fa-fw fa-fw fa fa-coffee"></i><span> 留言板</span></a></div></div></div><div id="mobile-sidebar-toc"><div class="toc_mobile_headline">目录</div><div class="sidebar-toc__content"><ol class="toc_mobile_items"><li class="toc_mobile_items-item toc_mobile_items-level-1"><a class="toc_mobile_items-link" href="#前言"><span class="toc_mobile_items-number">1.</span> <span class="toc_mobile_items-text">前言</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#目录"><span class="toc_mobile_items-number">1.1.</span> <span class="toc_mobile_items-text">目录</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#资料篇"><span class="toc_mobile_items-number">1.2.</span> <span class="toc_mobile_items-text">资料篇</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#技术站点"><span class="toc_mobile_items-number">1.2.1.</span> <span class="toc_mobile_items-text">技术站点</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#必看书籍"><span class="toc_mobile_items-number">1.2.2.</span> <span class="toc_mobile_items-text">必看书籍</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#大牛博客"><span class="toc_mobile_items-number">1.2.3.</span> <span class="toc_mobile_items-text">大牛博客</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#GitHub篇"><span class="toc_mobile_items-number">1.2.4.</span> <span class="toc_mobile_items-text">GitHub篇</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#工具篇"><span class="toc_mobile_items-number">1.3.</span> <span class="toc_mobile_items-text">工具篇</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#平台工具-amp-框架"><span class="toc_mobile_items-number">1.3.1.</span> <span class="toc_mobile_items-text">平台工具&amp;框架</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#常用工具"><span class="toc_mobile_items-number">1.3.2.</span> <span class="toc_mobile_items-text">常用工具</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#第三方服务"><span class="toc_mobile_items-number">1.3.3.</span> <span class="toc_mobile_items-text">第三方服务</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#爬虫相关-好玩的工具"><span class="toc_mobile_items-number">1.3.4.</span> <span class="toc_mobile_items-text">爬虫相关(好玩的工具)</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#安全相关"><span class="toc_mobile_items-number">1.3.5.</span> <span class="toc_mobile_items-text">安全相关</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#Web服务器性能-压力测试工具-负载均衡器"><span class="toc_mobile_items-number">1.3.6.</span> <span class="toc_mobile_items-text">Web服务器性能&#x2F;压力测试工具&#x2F;负载均衡器</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#大数据处理-数据分析-分布式工具"><span class="toc_mobile_items-number">1.4.</span> <span class="toc_mobile_items-text">大数据处理&#x2F;数据分析&#x2F;分布式工具</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#Web前端"><span class="toc_mobile_items-number">1.5.</span> <span class="toc_mobile_items-text">Web前端</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#语言篇"><span class="toc_mobile_items-number">1.6.</span> <span class="toc_mobile_items-text">语言篇</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#Scala"><span class="toc_mobile_items-number">1.6.1.</span> <span class="toc_mobile_items-text">Scala</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#Java"><span class="toc_mobile_items-number">1.6.2.</span> <span class="toc_mobile_items-text">Java</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#Python"><span class="toc_mobile_items-number">1.6.3.</span> <span class="toc_mobile_items-text">Python</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#Swift"><span class="toc_mobile_items-number">1.6.4.</span> <span class="toc_mobile_items-text">Swift</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#NET"><span class="toc_mobile_items-number">1.6.5.</span> <span class="toc_mobile_items-text">.NET</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#C-amp-C"><span class="toc_mobile_items-number">1.6.6.</span> <span class="toc_mobile_items-text">C &amp; C++</span></a></li></ol></li><li class="toc_mobile_items-item toc_mobile_items-level-2"><a class="toc_mobile_items-link" href="#其他"><span class="toc_mobile_items-number">1.7.</span> <span class="toc_mobile_items-text">其他</span></a><ol class="toc_mobile_items-child"><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#游戏开发相关"><span class="toc_mobile_items-number">1.7.1.</span> <span class="toc_mobile_items-text">游戏开发相关</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#日志聚合，分布式日志收集"><span class="toc_mobile_items-number">1.7.2.</span> <span class="toc_mobile_items-text">日志聚合，分布式日志收集</span></a></li><li class="toc_mobile_items-item toc_mobile_items-level-3"><a class="toc_mobile_items-link" href="#RTP-实时传输协议与音视频"><span class="toc_mobile_items-number">1.7.3.</span> <span class="toc_mobile_items-text">RTP,实时传输协议与音视频</span></a></li></ol></li></ol></li></ol></div></div></div><div id="body-wrap"><i class="fa fa-arrow-right" id="toggle-sidebar" aria-hidden="true">     </i><div class="auto_open" id="sidebar"><div class="sidebar-toc"><div class="sidebar-toc__title">目录</div><div class="sidebar-toc__progress"><span class="progress-notice">你已经读了</span><span class="progress-num">0</span><span class="progress-percentage">%</span><div class="sidebar-toc__progress-bar">     </div></div><div class="sidebar-toc__content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#前言"><span class="toc-number">1.</span> <span class="toc-text">前言</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#目录"><span class="toc-number">1.1.</span> <span class="toc-text">目录</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#资料篇"><span class="toc-number">1.2.</span> <span class="toc-text">资料篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#技术站点"><span class="toc-number">1.2.1.</span> <span class="toc-text">技术站点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#必看书籍"><span class="toc-number">1.2.2.</span> <span class="toc-text">必看书籍</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#大牛博客"><span class="toc-number">1.2.3.</span> <span class="toc-text">大牛博客</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#GitHub篇"><span class="toc-number">1.2.4.</span> <span class="toc-text">GitHub篇</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#工具篇"><span class="toc-number">1.3.</span> <span class="toc-text">工具篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#平台工具-amp-框架"><span class="toc-number">1.3.1.</span> <span class="toc-text">平台工具&amp;框架</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#常用工具"><span class="toc-number">1.3.2.</span> <span class="toc-text">常用工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#第三方服务"><span class="toc-number">1.3.3.</span> <span class="toc-text">第三方服务</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#爬虫相关-好玩的工具"><span class="toc-number">1.3.4.</span> <span class="toc-text">爬虫相关(好玩的工具)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#安全相关"><span class="toc-number">1.3.5.</span> <span class="toc-text">安全相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Web服务器性能-压力测试工具-负载均衡器"><span class="toc-number">1.3.6.</span> <span class="toc-text">Web服务器性能&#x2F;压力测试工具&#x2F;负载均衡器</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#大数据处理-数据分析-分布式工具"><span class="toc-number">1.4.</span> <span class="toc-text">大数据处理&#x2F;数据分析&#x2F;分布式工具</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Web前端"><span class="toc-number">1.5.</span> <span class="toc-text">Web前端</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#语言篇"><span class="toc-number">1.6.</span> <span class="toc-text">语言篇</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Scala"><span class="toc-number">1.6.1.</span> <span class="toc-text">Scala</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Java"><span class="toc-number">1.6.2.</span> <span class="toc-text">Java</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Python"><span class="toc-number">1.6.3.</span> <span class="toc-text">Python</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Swift"><span class="toc-number">1.6.4.</span> <span class="toc-text">Swift</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#NET"><span class="toc-number">1.6.5.</span> <span class="toc-text">.NET</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#C-amp-C"><span class="toc-number">1.6.6.</span> <span class="toc-text">C &amp; C++</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#其他"><span class="toc-number">1.7.</span> <span class="toc-text">其他</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#游戏开发相关"><span class="toc-number">1.7.1.</span> <span class="toc-text">游戏开发相关</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#日志聚合，分布式日志收集"><span class="toc-number">1.7.2.</span> <span class="toc-text">日志聚合，分布式日志收集</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#RTP-实时传输协议与音视频"><span class="toc-number">1.7.3.</span> <span class="toc-text">RTP,实时传输协议与音视频</span></a></li></ol></li></ol></li></ol></div></div></div><main id="content-outer"><div id="top-container" style="background-image: url(//goss.cfp.cn/creative/vcg/nowarter800/new/VCG41N940143972.jpg)"><div id="post-info"><div id="post-title"><div class="posttitle">瞧!技术汇总</div></div><div id="post-meta"><time class="post-meta__date"><i class="fa fa-calendar fa-fw" aria-hidden="true"></i> 发表于 2020-05-14<span class="post-meta__separator">|</span><i class="fa fa-history fa-fw" aria-hidden="true"></i> 更新于 2020-05-14</time><span class="post-meta__separator">|</span><span><i class="fa fa-inbox post-meta__icon fa-fw" aria-hidden="true"></i><a class="post-meta__categories" href="/categories/%E6%95%B4%E7%90%86/">整理</a></span><div class="post-meta-wordcount"><i class="fa fa-file-word-o post-meta__icon fa-fw" aria-hidden="true"></i><span>字数总计:</span><span class="word-count">7.5k</span><span class="post-meta__separator">|</span><i class="fa fa-clock-o post-meta__icon fa-fw" aria-hidden="true"></i><span>阅读时长: 26 分钟</span><div class="post-meta-pv-cv"><span class="post-meta__separator">|</span><span><i class="fa fa-eye post-meta__icon fa-fw" aria-hidden="true"> </i>阅读量:</span><span id="busuanzi_value_page_pv"></span></div></div></div></div></div><div class="layout layout_post" id="content-inner">   <article id="post"><div class="article-container" id="post-content"><html><head></head><body><h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>成为一名专业程序员的道路上，需要坚持练习、学习与积累，技术方面既要有一定的广度，更要有自己的深度。</p>
+<p>笔者作为一位tool mad，将工作以来用到的各种优秀资料、神器及框架整理在此，毕竟好记性不如烂键盘，此项目可以作为自己的不时之需。</p>
+<p>本人喜欢折腾，记录的东西也比较杂，各方面都会有一些，内容按重要等级排序，大家各取所需。</p>
+<p>这里的东西会持续积累下去，欢迎Star，也欢迎发PR给我。</p>
+<p><a href="https://github.com/thonatos" target="_blank" rel="noopener">Thonatos.Yang</a>整理的GitBook版本，阅读体验更佳：<a href="https://thonatos.gitbooks.io/be-a-professional-programmer/" target="_blank" rel="noopener">https://thonatos.gitbooks.io/be-a-professional-programmer/</a></p>
+<h2 id="目录"><a href="#目录" class="headerlink" title="目录"></a>目录</h2><!-- START doctoc generated TOC please keep comment here to allow auto update -->
+<!-- DON'T EDIT THIS SECTION, INSTEAD RE-RUN doctoc TO UPDATE -->
+
+
+<ul>
+<li><a href="#%E8%B5%84%E6%96%99%E7%AF%87">资料篇</a><ul>
+<li><a href="#%E6%8A%80%E6%9C%AF%E7%AB%99%E7%82%B9">技术站点</a></li>
+<li><a href="#%E5%BF%85%E7%9C%8B%E4%B9%A6%E7%B1%8D">必看书籍</a></li>
+<li><a href="#%E5%A4%A7%E7%89%9B%E5%8D%9A%E5%AE%A2">大牛博客</a></li>
+<li><a href="#github%E7%AF%87">GitHub篇</a></li>
+</ul>
+</li>
+<li><a href="#%E5%B7%A5%E5%85%B7%E7%AF%87">工具篇</a><ul>
+<li><a href="#%E5%B9%B3%E5%8F%B0%E5%B7%A5%E5%85%B7%E6%A1%86%E6%9E%B6">平台工具&框架</a></li>
+<li><a href="#%E5%B8%B8%E7%94%A8%E5%B7%A5%E5%85%B7">常用工具</a></li>
+<li><a href="#%E7%AC%AC%E4%B8%89%E6%96%B9%E6%9C%8D%E5%8A%A1">第三方服务</a></li>
+<li><a href="#%E7%88%AC%E8%99%AB%E7%9B%B8%E5%85%B3%E5%A5%BD%E7%8E%A9%E7%9A%84%E5%B7%A5%E5%85%B7">爬虫相关(好玩的工具)</a></li>
+<li><a href="#%E5%AE%89%E5%85%A8%E7%9B%B8%E5%85%B3">安全相关</a></li>
+<li><a href="#web%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%80%A7%E8%83%BD%E5%8E%8B%E5%8A%9B%E6%B5%8B%E8%AF%95%E5%B7%A5%E5%85%B7%E8%B4%9F%E8%BD%BD%E5%9D%87%E8%A1%A1%E5%99%A8">Web服务器性能/压力测试工具/负载均衡器</a></li>
+</ul>
+</li>
+<li><a href="#%E5%A4%A7%E6%95%B0%E6%8D%AE%E5%A4%84%E7%90%86%E6%95%B0%E6%8D%AE%E5%88%86%E6%9E%90%E5%88%86%E5%B8%83%E5%BC%8F%E5%B7%A5%E5%85%B7">大数据处理/数据分析/分布式工具</a></li>
+<li><a href="#web%E5%89%8D%E7%AB%AF">Web前端</a></li>
+<li><a href="#%E8%AF%AD%E8%A8%80%E7%AF%87">语言篇</a><ul>
+<li><a href="#scala">Scala</a></li>
+<li><a href="#java">Java</a></li>
+<li><a href="#python">Python</a></li>
+<li><a href="#swift">Swift</a></li>
+<li><a href="#net">.NET</a></li>
+<li><a href="#c--c">C & C++</a></li>
+</ul>
+</li>
+<li><a href="#%E5%85%B6%E4%BB%96">其他</a><ul>
+<li><a href="#%E6%B8%B8%E6%88%8F%E5%BC%80%E5%8F%91%E7%9B%B8%E5%85%B3">游戏开发相关</a></li>
+<li><a href="#%E6%97%A5%E5%BF%97%E8%81%9A%E5%90%88%E5%88%86%E5%B8%83%E5%BC%8F%E6%97%A5%E5%BF%97%E6%94%B6%E9%9B%86">日志聚合，分布式日志收集</a></li>
+<li><a href="#rtp%E5%AE%9E%E6%97%B6%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE%E4%B8%8E%E9%9F%B3%E8%A7%86%E9%A2%91">RTP,实时传输协议与音视频</a></li>
+</ul>
+</li>
+</ul>
+<!-- END doctoc generated TOC please keep comment here to allow auto update -->
+
+<h2 id="资料篇"><a href="#资料篇" class="headerlink" title="资料篇"></a>资料篇</h2><h3 id="技术站点"><a href="#技术站点" class="headerlink" title="技术站点"></a>技术站点</h3><ul>
+<li>在线学习：<a href="https://www.coursera.org/" target="_blank" rel="noopener">Coursera</a>、<a href="https://www.edx.org/" target="_blank" rel="noopener">edX</a>、<a href="https://cn.udacity.com/" target="_blank" rel="noopener">Udacity</a>、<a href="https://ocw.mit.edu/index.htm" target="_blank" rel="noopener">MIT公开课</a>、<a href="http://mooc.guokr.com/course/" target="_blank" rel="noopener">MOOC学院</a>、<a href="http://www.imooc.com/" target="_blank" rel="noopener">慕课网</a></li>
+<li><a href="https://news.ycombinator.com/" target="_blank" rel="noopener">Hacker News</a>：非常棒的针对编程的链接聚合网站</li>
+<li><a href="https://www.techmeme.com/" target="_blank" rel="noopener">Techmeme</a>：美国知名科技新闻和博客聚集网站，类似的还有（Panda, Hacker & Designer News）</li>
+<li><a href="https://www.reddit.com/r/programming/" target="_blank" rel="noopener">Reddit - Programming板块</a>：同上</li>
+<li>Java牛人必备：<a href="http://www.programcreek.com/" target="_blank" rel="noopener">Program Creek</a></li>
+<li><a href="https://stackoverflow.com/" target="_blank" rel="noopener">Stack Overflow</a>：IT技术问答网站</li>
+<li><a href="https://segmentfault.com/" target="_blank" rel="noopener">SegmentFault</a>：中文的技术问答社区</li>
+<li><a href="https://github.com/" target="_blank" rel="noopener">GitHub</a>：全球最大的源代码管理平台，很多知名开源项目都在上面，如<a href="https://github.com/torvalds/linux" target="_blank" rel="noopener">Linux内核</a>，<a href="https://github.com/openstack/openstack" target="_blank" rel="noopener">OpenStack</a>等</li>
+<li><a href="https://git.oschina.net/" target="_blank" rel="noopener">码云</a>：支持中文可免费创建私有项目的代码托管平台，可作为备选</li>
+<li><a href="https://leetcode.com/" target="_blank" rel="noopener">LeetCode</a>：来做做这些题吧，看看自己的算法水平如何？这可比什么面试宝典强多了。</li>
+<li><a href="https://www.lintcode.com/" target="_blank" rel="noopener">LintCode</a>：支持中文的编程题在线训练平台，可作为备选</li>
+<li><a href="https://www.kaggle.com/" target="_blank" rel="noopener">Kaggle</a>,<a href="https://www.topcoder.com/" target="_blank" rel="noopener">Topcoder</a>: 机器学习、大数据竞赛</li>
+<li><a href="https://gold.xitu.io/" target="_blank" rel="noopener">掘金</a>：高质量的技术社区</li>
+<li><a href="https://toutiao.io/" target="_blank" rel="noopener">开发者头条</a></li>
+<li><a href="http://www.infoq.com/cn" target="_blank" rel="noopener">InfoQ</a>：企业级应用，关注软件开发领域</li>
+<li><a href="https://www.v2ex.com/" target="_blank" rel="noopener">V2EX: way to explore</a></li>
+<li>国内老牌技术社区：<a href="https://www.oschina.net/" target="_blank" rel="noopener">OSChina</a>、<a href="http://www.cnblogs.com/" target="_blank" rel="noopener">博客园</a>、<a href="http://www.csdn.net/" target="_blank" rel="noopener">CSDN</a>、<a href="http://www.51cto.com/" target="_blank" rel="noopener">51CTO</a></li>
+<li>免费的it电子书：<a href="http://it-ebooks.info/" target="_blank" rel="noopener">http://it-ebooks.info/</a></li>
+<li>在线学习：<a href="http://www.udemy.com/" target="_blank" rel="noopener">http://www.udemy.com/</a></li>
+<li>优质学习资源：<a href="http://plus.mojiax.com/" target="_blank" rel="noopener">http://plus.mojiax.com/</a></li>
+<li>代码练习：<a href="http://exercism.io/" target="_blank" rel="noopener">http://exercism.io/</a>   and  <a href="https://www.codingame.com" target="_blank" rel="noopener">https://www.codingame.com</a></li>
+<li><a href="http://www.devstore.cn/" target="_blank" rel="noopener">DevStore</a>:开发者服务商店</li>
+<li><a href="https://msdn.microsoft.com/zh-cn" target="_blank" rel="noopener">MSDN</a>：微软相关的官方技术集中地，主要是文档类</li>
+<li><a href="https://developers.google.cn/" target="_blank" rel="noopener">谷歌开发者</a></li>
+<li><a href="http://www.ctolib.com/" target="_blank" rel="noopener">码库</a> - 收录了实用的开源项目及资源</li>
+<li><a href="http://coding.net" target="_blank" rel="noopener">Coding</a> 基于Git的国内代码托管平台，支持私有项目，有项目管理相关功能</li>
+</ul>
+<h3 id="必看书籍"><a href="#必看书籍" class="headerlink" title="必看书籍"></a>必看书籍</h3><ul>
+<li>SICP(<a href="https://mitpress.mit.edu/sicp/" target="_blank" rel="noopener">Structure and Interpretation of Computer Programs</a>)</li>
+<li>深入理解计算机系统</li>
+<li>代码大全2</li>
+<li>人件</li>
+<li>人月神话</li>
+<li>软件随想录</li>
+<li>算法导论（麻省理工学院出版社）</li>
+<li>编程之美</li>
+<li><a href="https://book.douban.com/subject/30155731/" target="_blank" rel="noopener">算法之美</a>，作者：[美]布莱恩·克里斯汀，汤姆·格里菲思</li>
+<li>离散数学及其应用</li>
+<li>设计模式</li>
+<li>黑客与画家</li>
+<li>编程珠玑</li>
+<li>The Little Schemer</li>
+<li>Simply Scheme_Introducing_Computer_Science</li>
+<li>C++ Primer</li>
+<li>Effective C++</li>
+<li>TCP/IP详解</li>
+<li>Unix 编程艺术</li>
+<li>技术的本质</li>
+<li>软件随想录</li>
+<li>计算机程序设计艺术</li>
+<li>程序员的自我修养：链接、装载与库</li>
+<li>程序员修炼之道</li>
+<li>高效能程序员的修炼</li>
+<li>《精神分析引论》弗洛伊德</li>
+<li>《失控》《科技想要什么》《技术元素》凯文凯利</li>
+<li>程序开发心理学</li>
+<li>天地一沙鸥</li>
+<li>搞定：无压力工作的艺术</li>
+</ul>
+<h3 id="大牛博客"><a href="#大牛博客" class="headerlink" title="大牛博客"></a>大牛博客</h3><ul>
+<li><a href="https://github.com/rekihattori/awesome-programmers" target="_blank" rel="noopener">awesome-programmers</a>: 各领域大牛，值得纪念的程序员们</li>
+<li><a href="http://blog.codingnow.com/" target="_blank" rel="noopener">云风</a>: 游戏界大牛</li>
+<li><a href="http://www.yinwang.org/" target="_blank" rel="noopener">王垠</a>: 不少文章喷到蛮有道理</li>
+<li><a href="http://tianchunbinghe.blog.163.com/" target="_blank" rel="noopener">冰河-伞哥</a>: Lisp大牛</li>
+<li><a href="https://zhuanlan.zhihu.com/p/25042028" target="_blank" rel="noopener">R大</a>: 【干货满满】RednaxelaFX写的文章/回答的导航帖]</li>
+<li><a href="http://coolshell.cn/" target="_blank" rel="noopener">陈皓</a>: 左耳朵耗子</li>
+<li><a href="https://blog.codinghorror.com/" target="_blank" rel="noopener">Jeff Atwood</a>: 国外知名博主</li>
+<li><a href="http://www.ruanyifeng.com/" target="_blank" rel="noopener">阮一峰</a>: 黑客与画家译者，Web</li>
+<li><a href="http://www.liaoxuefeng.com/" target="_blank" rel="noopener">廖雪峰</a>: 他的Python、Git教程不少人都看过</li>
+<li><a href="https://zhuanlan.zhihu.com/taosay" target="_blank" rel="noopener">道哥的黑板报</a>: 安全</li>
+<li><a href="https://github.com/search?l=&o=desc&p=1&q=location%3AChina&ref=advsearch&s=followers&type=Users&utf8=%E2%9C%93" target="_blank" rel="noopener">国内GitHub上关注度较高的开发者</a></li>
+</ul>
+<h3 id="GitHub篇"><a href="#GitHub篇" class="headerlink" title="GitHub篇"></a>GitHub篇</h3><p>** Awesome **</p>
+<ul>
+<li><a href="https://github.com/sindresorhus/awesome" target="_blank" rel="noopener">Awesome</a>: 这是个Awesome合集，常见的资料这里面都能找到</li>
+<li><a href="https://github.com/jnv/lists" target="_blank" rel="noopener">杂七杂八、有用没用的Awesome合集</a></li>
+<li><a href="https://github.com/bayandin/awesome-awesomeness" target="_blank" rel="noopener">Awesomeness</a> - 非常不错的语言类学习资料集合</li>
+<li><a href="https://github.com/xingshaocheng/architect-awesome" target="_blank" rel="noopener">architect-awesome</a> - 后端架构师技术图谱</li>
+<li><a href="https://github.com/cjwirth/awesome-ios-ui" target="_blank" rel="noopener">awesome-ios-ui</a></li>
+<li><a href="https://github.com/wasabeef/awesome-android-ui" target="_blank" rel="noopener">awesome-android-ui</a></li>
+<li><a href="https://github.com/lightSky/Awesome-MaterialDesign" target="_blank" rel="noopener">Awesome-MaterialDesign</a></li>
+<li><a href="https://github.com/caesar0301/awesome-public-datasets" target="_blank" rel="noopener">awesome-public-datasets</a></li>
+<li><a href="https://github.com/paragonie/awesome-appsec" target="_blank" rel="noopener">awesome-AppSec(系统安全)</a></li>
+<li><a href="https://github.com/okulbilisim/awesome-datascience" target="_blank" rel="noopener">awesome-datascience</a></li>
+<li><a href="https://github.com/fasouto/awesome-dataviz" target="_blank" rel="noopener">awesome-dataviz</a> - 数据可视化库及资料</li>
+<li><a href="https://github.com/jacksu/awesome-es" target="_blank" rel="noopener">awesome-es</a></li>
+<li><a href="https://github.com/Blankj/awesome-comment" target="_blank" rel="noopener">awesome-comment</a> - 神注释大全</li>
+<li><a href="https://github.com/carpedm20/awesome-hacking" target="_blank" rel="noopener">awesome-hacking</a> - 黑客工具箱</li>
+<li><a href="https://github.com/jacksu/machine-learning" target="_blank" rel="noopener">awesome-machine-learning</a> - 机器学习资料</li>
+<li><a href="https://github.com/redhatxl/awesome-kubernetes-notes" target="_blank" rel="noopener">awesome-kubernetes-notes</a> - kubernetes学习资料</li>
+</ul>
+<p>** 书籍资料 **</p>
+<ul>
+<li><a href="https://github.com/mr-mig/every-programmer-should-know" target="_blank" rel="noopener">Every Programmer Should Know</a></li>
+<li><a href="https://people.eecs.berkeley.edu/~rcs/research/interactive_latency.html" target="_blank" rel="noopener">Latency Numbers Every Programmer Should Know</a></li>
+<li><a href="https://github.com/donnemartin/system-design-primer" target="_blank" rel="noopener">system-design-primer</a>: 系统设计入门</li>
+<li><a href="https://github.com/bingwen/free-programming-books/blob/master/free-programming-books-ch.md" target="_blank" rel="noopener">free-programming-books</a> <a href="https://github.com/vhf/free-programming-books/blob/master/free-programming-books-zh.md" target="_blank" rel="noopener">中文版</a></li>
+<li><a href="https://github.com/justjavac/free-programming-books-zh_CN" target="_blank" rel="noopener">免费的编程中文书籍索引</a></li>
+<li><a href="https://github.com/julycoding/The-Art-Of-Programming-By-July" target="_blank" rel="noopener">《程序员编程艺术 — 面试和算法心得》</a></li>
+<li><a href="https://github.com/dariubs/GoBooks" target="_blank" rel="noopener">GoBooks</a></li>
+<li><a href="https://github.com/papers-we-love/papers-we-love" target="_blank" rel="noopener">Papers we love</a></li>
+<li><a href="https://github.com/JustFollowUs/Natural-Language-Processing" target="_blank" rel="noopener">自然语言处理NLP推荐学习路线及参考资料</a></li>
+<li><a href="https://github.com/josephmisiti/awesome-machine-learning" target="_blank" rel="noopener">超级棒的机器学习资料（框架，库，软件）</a>, <a href="http://www.oschina.net/news/53818/awesome-machine-learning" target="_blank" rel="noopener">中文翻译版</a></li>
+<li><a href="http://news.cnblogs.com/n/504467/" target="_blank" rel="noopener">机器学习(Machine Learning)&深入学习(Deep Learning)资料</a></li>
+<li><a href="http://special.csdncms.csdn.net/BeDocker/" target="_blank" rel="noopener">Docker资料合集</a></li>
+<li><a href="https://github.com/apache/incubator-storm/tree/master/examples/storm-starter" target="_blank" rel="noopener">学习使用Strom</a></li>
+<li><a href="http://ercoppa.github.io/HadoopInternals/" target="_blank" rel="noopener">Hadoop Internals</a></li>
+<li><a href="https://github.com/JerryLead/SparkInternals/tree/master/markdown" target="_blank" rel="noopener">Spark Internals</a></li>
+<li><a href="http://hadoop.readthedocs.org/en/latest/" target="_blank" rel="noopener">大数据时代的数据分析与数据挖掘 – 基于Hadoop实现</a></li>
+<li><a href="http://samypesse.gitbooks.io/how-to-create-an-operating-system/index.html" target="_blank" rel="noopener">如何制作操作系统</a></li>
+<li><a href="https://github.com/zhuangbiaowei/learn-with-open-source" target="_blank" rel="noopener">借助开源项目学习软件开发</a></li>
+<li><a href="http://code.csdn.net/news/2821842" target="_blank" rel="noopener">几个不错的开源游戏引擎</a></li>
+<li><a href="https://github.com/hit9/PyZh" target="_blank" rel="noopener">一起写Python文章，一起看Python文章</a></li>
+<li><a href="http://blog.fens.me/series-r/" target="_blank" rel="noopener">R的极客理想系列文章</a></li>
+<li><a href="https://github.com/bolasblack/http-api-guide" target="_blank" rel="noopener">HTTP接口设计指南</a></li>
+<li><a href="https://github.com/foru17/front-end-collect" target="_blank" rel="noopener">分享自己长期关注的前端开发相关的优秀网站、博客、以及活跃开发者</a></li>
+<li><a href="https://github.com/rxin/db-readings" target="_blank" rel="noopener">Readings in Databases</a></li>
+<li><a href="https://github.com/rushter/data-science-blogs" target="_blank" rel="noopener">Data Science blogs</a></li>
+<li><a href="https://github.com/oldratlee/translations/blob/master/log-what-every-software-engineer-should-know-about-real-time-datas-unifying/README.md" target="_blank" rel="noopener">日志：每个软件工程师都应该知道的有关实时数据的统一概念</a></li>
+<li><a href="http://guides.codepath.com/android" target="_blank" rel="noopener">Android Code Path</a></li>
+<li><a href="https://github.com/GeniusVJR/LearningNotes" target="_blank" rel="noopener">Android Learn Notes</a></li>
+<li><a href="https://github.com/ziadoz/awesome-php" target="_blank" rel="noopener">PHP 类库框架，资料集合</a></li>
+</ul>
+<p>** 优秀项目 **</p>
+<ul>
+<li><a href="http://news.cnblogs.com/n/506775/" target="_blank" rel="noopener">最值得关注的10个C语言开源项目</a></li>
+<li><a href="http://code.csdn.net/news/2822568" target="_blank" rel="noopener">15款值得学习的小型开源项目</a></li>
+<li><a href="https://github.com/Aufree/trip-to-iOS" target="_blank" rel="noopener">iOS-100个开源组件</a></li>
+<li><a href="http://code.csdn.net/news/2822753" target="_blank" rel="noopener">十大Material Design开源项目</a></li>
+<li><a href="https://github.com/Trinea/android-open-project" target="_blank" rel="noopener">Android开源项目分类汇总</a></li>
+<li><a href="https://github.com/gothinkster/realworld" target="_blank" rel="noopener">The mother of all demo apps</a></li>
+</ul>
+<p>** 前端 & Node.js **</p>
+<ul>
+<li><a href="https://github.com/moklick/frontend-stuff" target="_blank" rel="noopener">前端资源</a></li>
+<li><a href="https://github.com/w3crange/Front-End-Develop-Guide" target="_blank" rel="noopener">前端开发指南</a></li>
+<li><a href="http://html5ify.com/fks/" target="_blank" rel="noopener">前端技能汇总</a></li>
+<li><a href="http://www.daqianduan.com/nav" target="_blank" rel="noopener">前端资源大导航</a></li>
+<li><a href="https://github.com/lisposter/frontend-books" target="_blank" rel="noopener">收集前端方面的书籍</a></li>
+<li><a href="https://github.com/markyun/My-blog/tree/master/Front-end-Developer-Questions" target="_blank" rel="noopener">2014年最新前端开发面试题</a></li>
+<li><a href="https://github.com/airbnb/javascript" target="_blank" rel="noopener">简单清晰的JavaScript语言教程，代码示例</a></li>
+<li><a href="https://github.com/airbnb/javascript" target="_blank" rel="noopener">JavaScript编程规范</a></li>
+<li><a href="https://github.com/bolshchikov/js-must-watch" target="_blank" rel="noopener">JavaScript必看视频</a></li>
+<li><a href="http://javascript.ruanyifeng.com/" target="_blank" rel="noopener">JavaScript标准参考教程（阮一峰的，整理的不错）</a></li>
+<li><a href="https://github.com/bolshchikov/js-must-watch" target="_blank" rel="noopener">JS必看</a></li>
+<li><a href="https://github.com/jmcunningham/AngularJS-Learning/blob/master/ZH-CN.md" target="_blank" rel="noopener">AngularJS Guide的中文分支</a></li>
+<li><a href="https://github.com/timjacobi/angular2-education" target="_blank" rel="noopener">Angular2学习资料</a></li>
+<li><a href="https://github.com/mgechev/angularjs-style-guide/blob/master/README-zh-cn.md" target="_blank" rel="noopener">AngularJS应用的最佳实践和风格指南</a></li>
+<li><a href="https://github.com/reactnativecn/react-native-guide" target="_blank" rel="noopener">React-Native学习指南</a></li>
+<li><a href="http://nqdeng.github.io/7-days-nodejs/" target="_blank" rel="noopener">七天学会NodeJS</a></li>
+<li><a href="https://github.com/sergtitov/NodeJS-Learning/blob/master/cn_resource.md" target="_blank" rel="noopener">node.js中文资料导航</a></li>
+<li><a href="http://blog.fens.me/nodejs-roadmap/" target="_blank" rel="noopener">Nodejs学习路线图</a></li>
+<li><a href="http://stackoverflow.com/questions/2353818/how-do-i-get-started-with-node-js/9629682#9629682" target="_blank" rel="noopener">如何学习nodejs</a></li>
+</ul>
+<p>** 工作，工具 **</p>
+<ul>
+<li><a href="https://godbolt.org/" target="_blank" rel="noopener">Compiler Explorer</a></li>
+<li><a href="https://github.com/kahun/awesome-sysadmin" target="_blank" rel="noopener">系统管理员工具集合</a></li>
+<li><a href="http://git-scm.com/book/zh" target="_blank" rel="noopener">Pro Git</a></li>
+<li><a href="https://github.com/taobao/nginx-book" target="_blank" rel="noopener">Nginx开发从入门到精通</a></li>
+<li><a href="https://github.com/justjavac/Google-IPs.git" target="_blank" rel="noopener">Google 全球 IP 地址库</a></li>
+<li><a href="https://github.com/greatghoul/remote-working" target="_blank" rel="noopener">收集整理远程工作相关的资料</a></li>
+<li><a href="https://github.com/chriskempson/base16" target="_blank" rel="noopener">Color schemes for hackers</a></li>
+<li><a href="https://github.com/ellisonleao/magictools" target="_blank" rel="noopener">游戏开发工具集，MagicTools</a></li>
+<li><a href="https://github.com/ripienaar/free-for-dev" target="_blank" rel="noopener">开发者工具箱， free-for-dev</a></li>
+<li><a href="https://github.com/tiimgreen/github-cheat-sheet/blob/master/README.zh-cn.md" target="_blank" rel="noopener">GitHub秘籍</a></li>
+<li><a href="https://github.com/agis-/git-style-guide" target="_blank" rel="noopener">Git风格指南</a></li>
+<li><a href="https://github.com/hzlzh/Best-App" target="_blank" rel="noopener">Best-App</a></li>
+<li><a href="http://dingba.top/" target="_blank" rel="noopener">OSINT:dingba.top</a>, <a href="https://github.com/jivoi/awesome-osint" target="_blank" rel="noopener">awesome-osint</a></li>
+<li>加壳、脱壳工具：Armadillo, ASProtect, Themida, Execryptor, VMProtect, Obsidium</li>
+</ul>
+<h2 id="工具篇"><a href="#工具篇" class="headerlink" title="工具篇"></a>工具篇</h2><h3 id="平台工具-amp-框架"><a href="#平台工具-amp-框架" class="headerlink" title="平台工具&框架"></a>平台工具&框架</h3><ul>
+<li>云：Rancher > Kubernetes(k8s) > Docker（镜像库：registry，Harbor，JFrog Artifactory）</li>
+<li><a href="http://jupyter.org/" target="_blank" rel="noopener">Jupyter</a>: IPython Notebook, 有个子项目sparkmagic，可以和Spark集合在一起，类似spark-notebook项目</li>
+<li><a href="http://swagger.io/" target="_blank" rel="noopener">Swagger</a>: RESTful API设计工具，前后端分离项目必备，顺便推荐下<a href="https://www.easy-mock.com/" target="_blank" rel="noopener">Easy Mock</a></li>
+<li><a href="https://flutter.io/" target="_blank" rel="noopener">Flutter</a>: Google出品，高性能跨平台移动应用开发框架</li>
+<li><a href="https://zipkin.io/" target="_blank" rel="noopener">OpenZipkin</a>: 分布式Trace系统，可用于分析服务调用链间的消耗</li>
+<li><a href="https://sentry.io" target="_blank" rel="noopener">Sentry</a>: 系统监控与错误日志跟踪系统</li>
+<li>基于Web技术的跨平台应用开发框架：<a href="https://github.com/tauri-apps/tauri" target="_blank" rel="noopener">tauri:Rust开发，小而快</a>，<a href="https://sciter.com/" target="_blank" rel="noopener">sciter</a>，<a href="https://github.com/electron/electron" target="_blank" rel="noopener">electron</a></li>
+<li><a href="https://secure.phabricator.com/" target="_blank" rel="noopener">Phabricator</a>: 软件开发平台，Facebook出品，现已开源，CodeReview神器（从这个往下一直到GitLab之间的工具统统可以忽略了）</li>
+<li>Redmine/Trac：项目管理平台</li>
+<li>Jenkins/Jira(非开源)：持续集成系统（Apache Continuum，这个是Apache下的CI系统，还没来得及研究）</li>
+<li>git，svn：源代码版本控制系统</li>
+<li>GitLab/Gitorious：构建自己的GitHub服务器</li>
+<li><a href="https://ci.appveyor.com/" target="_blank" rel="noopener">AppVeyor</a> - 云端持续集成工具，可以与GitHub搭配使用</li>
+<li>Postman:RESTful，api测试工具，HTTP接口开发必备神器；可替代工具：<a href="https://insomnia.rest/" target="_blank" rel="noopener">Insomnia</a></li>
+<li><a href="http://airbnb.design/lottie/" target="_blank" rel="noopener">Lottie</a>: AE动画变原生代码，设计师必备</li>
+<li>Sonar：代码质量管理平台</li>
+<li><a href="https://jmeter.apache.org/" target="_blank" rel="noopener">JMeter</a>: 测试框架，还有<a href="https://locust.io/" target="_blank" rel="noopener">Locust</a></li>
+<li>Nessus: 系统漏洞扫描器</li>
+<li>gitbook：<a href="https://www.gitbook.io/" target="_blank" rel="noopener">https://www.gitbook.io/</a>写书的好东西，当然用来写文档也很不错的（发现不少产品的文档就是用的它）</li>
+<li>Travis-ci：开源项目持续集成必备，和GitHub相结合，<a href="https://travis-ci.org/" target="_blank" rel="noopener">https://travis-ci.org/</a></li>
+<li>Trello：简单高效的项目管理平台，注重看板管理</li>
+<li>日志聚合：graylog、ELK（推荐新一代的graylog，基本上算作是开源的Splunk了）</li>
+<li>开源测试工具、社区（Selenium、OpenQA.org）</li>
+<li>Puppet:一个自动管理引擎，可以适用于Linux、Unix以及Windows平台。所谓配置管理系统，就是管理机器里面诸如文件、用户、进程、软件包这些资源。无论是管理1台，还是上万台机器Puppet都能轻松搞定。其他类似工具：CFEngine、SaltStack、Ansible</li>
+<li><a href="http://www.jumpserver.org/" target="_blank" rel="noopener">jumpserver</a>: 开源堡垒机</li>
+<li><a href="https://prometheus.io/" target="_blank" rel="noopener">Prometheus</a> 监控系统+时序数据库，一般搭配Grafana使用。类似的系统还有Nagios,Zabbix,Ganglia</li>
+<li>fleet：分布式init系统</li>
+<li>Ansible：能够大大简化Unix管理员的自动化配置管理与流程控制方式。</li>
+<li>GeoLite免费数据库</li>
+<li>jsHint:js代码验证工具</li>
+<li>haproxy: 高可用负载均衡（此外类似的系统还有nginx，lvs）</li>
+<li>linux OS性能分析工具：dstat，iostat，iotop，nmon</li>
+<li>kimono：将网页信息转换为api接口的工具</li>
+<li>集群管理工具：pdsh，ClusterSSH，mussh（可以用它快速管理Hadoop集群）ipa-server做统一的认证管理</li>
+<li>influxdb: 分布式时序数据库，结合Grafana可以进行实时数据分析</li>
+<li>dot: 程序员绘图利器（是种语言，也是个工具）</li>
+<li>Graph::Easy: （Ascii Art工具）字符流程图绘制，实乃程序员装逼神器。其他类似的工具Asciiflow, vi插件：drawit!</li>
+<li>spf13-vim: 让你的vim飞起来！</li>
+<li>Kubernetes: 容器集群管理系统</li>
+<li><a href="https://gatling.io/" target="_blank" rel="noopener">Gatling</a>: 服务器性能压力测试工具，类似的还有<a href="https://github.com/wg/wrk" target="_blank" rel="noopener">wrk</a></li>
+<li>systemtap: Linux内核探测工具、内核调试神器</li>
+<li>Cygwin：Windows下的类UNIX模拟环境</li>
+<li>MinGW：Windows下的GNU工具集</li>
+</ul>
+<h3 id="常用工具"><a href="#常用工具" class="headerlink" title="常用工具"></a>常用工具</h3><ul>
+<li><a href="http://editorconfig.org/" target="_blank" rel="noopener">EditorConfig</a>: 让我们在各种不同IDE或编辑器下写代码保持风格一致</li>
+<li><a href="https://github.com/hzlzh/Best-App" target="_blank" rel="noopener">Mac下的神兵利器</a></li>
+<li><a href="https://asciinema.org/" target="_blank" rel="noopener">asciinema</a>: 终端录屏神器</li>
+<li>Fiddler：非常好用的Web前端调试工具，当然是针对底层http协议的，一般情况使用Chrome等自带的调试工具也足够了，特殊情况还得用它去处理</li>
+<li>Charles: Mac上的Web代理调试工具，类似Fiddler</li>
+<li><a href="https://fir.im/" target="_blank" rel="noopener">fir.im</a>免费的移动App内测托管平台</li>
+<li>wireshark：知名的网络数据包分析工具</li>
+<li>PowerCmd:替代Windows Cmd的利器，类似的还有<a href="http://cmder.net/" target="_blank" rel="noopener">cmder</a></li>
+<li><a href="https://mobaxterm.mobatek.net/" target="_blank" rel="noopener">MobaXterm</a>: Windows下的全能终端神器</li>
+<li><a href="https://sourceforge.net/projects/xming/" target="_blank" rel="noopener">Xming</a>: Windows下的X Window Server，结合putty可以实现linux的图形化软件直接跑在Windows上 </li>
+<li>RegexBuddy:强大的正则表达式测试工具</li>
+<li>Source Insight：源代码阅读神器</li>
+<li>SublimeText：程序员最爱的编辑器</li>
+<li>Database.NET：一个通用的关系型数据库客户端，基于.NET 4.0开发的，做简单的处理还是蛮方便的</li>
+<li>Navicat Premium：支持MySql、PostgreSQL、Oracle、Sqlite和SQL Server的客户端，通用性上不如Database.NET，但性能方面比Database.NET好很多，自带备份功能也用于数据库定时备份。</li>
+<li>Synergy : 局域网内一套键盘鼠标控制多台电脑</li>
+<li>DameWare：远程协助工具集（我在公司主要控制大屏幕用）</li>
+<li>Radmin: 远程控制工具，用了一段时间的DameWare，还要破解，对Win7支持的不好，还是发现这个好用</li>
+<li>Listary：能极大幅度提高你 Windows 文件浏览与搜索速度效率的「超级神器」</li>
+<li>Clover：给资源管理器加上多标签，我平时工作的时候就用它，像Chrome一样使用资源管理器，甚是方便啊（这是Windows平台的）</li>
+<li>WinLaunch：模拟Mac OS的Launch工具</li>
+<li>OllyDbg: OD大名鼎鼎的反汇编工具，Win平台</li>
+<li>Fritzing：绘制电路图</li>
+<li>LICEcap：gif教程制作</li>
+<li>Enigma Virtual Box（将exe，dll等封装成一个可执行程序）</li>
+<li>Open DBDiff(针对SqlServer)数据库同步</li>
+<li>SymmetricDS：数据库同步</li>
+<li>BIEE,Infomatica，SPSS，weka，R语言：数据分析</li>
+<li>CodeSmith，LightSwitch：代码生成</li>
+<li>Pandoc：Markdown转换工具，出书用的。以前玩过docbook，不过现在还是Markdown盛行啊。</li>
+<li>Window Magnet[Mac]：增强Mac窗口管理功能，想Win7一样具有窗口拖放到屏幕边缘自动调整的功能</li>
+<li>log explorer：查看SqlServer日志</li>
+<li>dependency walker：查询Windows应用程序dll依赖项</li>
+<li>Shairport4w：将iPhone，iPad，iPod上的音频通过AirPlay协议传输到PC上</li>
+<li>ngrok：内网穿透工具</li>
+<li>Axure:快速原型制作工具，还有个在线作图的工具国内的一个创业团队做的，用着很不错<a href="http://www.processon.com/" target="_blank" rel="noopener">http://www.processon.com/</a></li>
+<li>Origami: 次世代交互设计神器</li>
+<li>百度脑图：<a href="http://naotu.baidu.com/" target="_blank" rel="noopener">http://naotu.baidu.com/</a></li>
+<li>tinyproxy:（Linux）小型的代理服务器支持http和https协议</li>
+<li>EaseUS Partition Master：超级简单的分区调整工具，速度还是蛮快的，C盘不够用了就用它从D盘划点空间吧，不用重装系统这么折腾哦。</li>
+<li>CheatEngine：玩游戏修改内存值必备神器（记得我在玩轩辕剑6的时候就用的它，超级方便呢）</li>
+<li>ApkIDE: Android反编译神器（类似的还有apktool）</li>
+<li>HandShaker: 锤子的良心之作：为解决安卓手机与Mac当中文件传输问题，专门开发的SmartFinder文件管理器改进版</li>
+<li>翻、墙工具（自|由|门、天行浏览器，免费的VPN：<a href="http://www.mangovpn.com/）,发现最方便还属Lantern，免费用起来超级方便（更新于2015-08-22）" target="_blank" rel="noopener">http://www.mangovpn.com/）,发现最方便还属Lantern，免费用起来超级方便（更新于2015-08-22）</a></li>
+<li>设计工具：Sketch、OmniGraffle</li>
+<li>MindManger：思维导图</li>
+<li>MagicDraw: Uml图工具</li>
+<li>innotop：MySql状态监测工具</li>
+<li>墨刀：比Axure更为简单的原型工具，可以快速制作原型</li>
+<li>Karabiner: Mac专用，修改键盘键位的神器，机械键盘必备</li>
+<li>Timing：Mac专用，统计你的时间都花在哪了</li>
+<li>LaTeX: 基于ΤΕΧ的排版系统, 让写论文更方便</li>
+<li>Antlr：开源的语法分析器，可以让你毫无压力的写个小parser</li>
+</ul>
+<h3 id="第三方服务"><a href="#第三方服务" class="headerlink" title="第三方服务"></a>第三方服务</h3><ul>
+<li><a href="https://letsencrypt.org/" target="_blank" rel="noopener">Let’s Encrypt</a>: 免费、自动化、开放的证书签发服务</li>
+<li>DnsPod：一个不错的智能DNS服务解析提供商</li>
+<li>DigitalOcean：海外的云主机提供商，价格便宜，磁盘是SSD的，用过一段时间整体上还可以，不过毕竟是海外的，网速比较慢。国内的就是阿里云了。还有个比较知名的是：Linode，据说速度上比DigitalOcean好很多</li>
+<li>移动端推送服务：个推、JPush、云巴</li>
+<li><a href="https://leancloud.cn/" target="_blank" rel="noopener">LeanCloud</a>：移动应用开发服务，包括:数据存储、用户管理、消息推送、应用统计、社交分享、实时聊天等服务</li>
+<li><a href="http://www.colorhunt.co/" target="_blank" rel="noopener">Color Hunt</a>: 漂亮炫酷的配色网站，程序员的福音</li>
+<li><a href="https://www.heroku.com/" target="_blank" rel="noopener">Heroku: PaaS平台</a></li>
+</ul>
+<h3 id="爬虫相关-好玩的工具"><a href="#爬虫相关-好玩的工具" class="headerlink" title="爬虫相关(好玩的工具)"></a>爬虫相关(好玩的工具)</h3><ul>
+<li>Phantomjs(Web自动化测试，服务端渲染等)</li>
+<li>berserkJS(基于Phantomjs的改进版本)</li>
+<li>SlimerJS</li>
+<li>CasperJS</li>
+<li>selenium</li>
+<li>HtmlUnit（开源的java 页面分析工具，也是个Headless的浏览器）</li>
+</ul>
+<h3 id="安全相关"><a href="#安全相关" class="headerlink" title="安全相关"></a>安全相关</h3><ul>
+<li>sql注入检测：sqlmap、haviji</li>
+<li>端口扫描：nmap, </li>
+<li><a href="https://github.com/robertdavidgraham/masscan" target="_blank" rel="noopener">masscan</a>：据说可以6分钟中扫遍整个互联网的端口扫描器</li>
+<li>渗透测试：BurpLoader</li>
+<li>sqltools: sql漏洞利用工具</li>
+<li>snort: 入侵检测</li>
+</ul>
+<h3 id="Web服务器性能-压力测试工具-负载均衡器"><a href="#Web服务器性能-压力测试工具-负载均衡器" class="headerlink" title="Web服务器性能/压力测试工具/负载均衡器"></a>Web服务器性能/压力测试工具/负载均衡器</h3><ul>
+<li>ab: ab是apache自带的一款功能强大的测试工具</li>
+<li>curl-loader: 真实模拟、测试Web负载</li>
+<li>http_load: 程序非常小，解压后也不到100K</li>
+<li>webbench: 是Linux下的一个网站压力测试工具，最多可以模拟3万个并发连接去测试网站的负载能力。</li>
+<li>Siege: 一款开源的压力测试工具，可以根据配置对一个WEB站点进行多用户的并发访问，记录每个用户所有请求过程的相应时间，并在一定数量的并发访问下重复进行。</li>
+<li>squid（前端缓存），nginx（负载），nodejs（没错它也可以，自己写点代码就能实现高性能的负载均衡器）：常用的负载均衡器</li>
+<li>Piwik：开源网站访问量统计系统</li>
+<li>ClickHeat：开源的网站点击情况热力图</li>
+<li>HAProxy：高性能TCP /HTTP负载均衡器</li>
+<li>ElasticSearch：搜索引擎基于Lucene</li>
+<li>Page Speed SDK和YSLOW</li>
+<li>HAR Viewer: HAR分析工具</li>
+<li>protractor：E2E（end to end）自动化测试工具</li>
+</ul>
+<h2 id="大数据处理-数据分析-分布式工具"><a href="#大数据处理-数据分析-分布式工具" class="headerlink" title="大数据处理/数据分析/分布式工具"></a>大数据处理/数据分析/分布式工具</h2><ul>
+<li>Hadoop：分布式的文件系统，结合其MapReduce编程模型可以用来做海量数据的批处理（Hive，Pig，HBase啥的就不说了），值得介绍的是Cloudera的Hadoop分支CDH5，基于YARN MRv2集成了Spark可直接用于生产环境的Hadoop，对于企业快速构建数据仓库非常有用。</li>
+<li>Spark：大规模数据处理框架（可以应付企业中常见的三种数据处理场景：复杂的批量数据处理（batch data processing）；基于历史数据的交互式查询（interactive query）；基于实时数据流的数据处理（streaming data processing））</li>
+<li>除了Spark，其他几个不错的计算框架还有：Kylin，Flink，Drill</li>
+<li>Ignite: In-Memory Data Fabric</li>
+<li>CarbonData: 华为的孵化项目，支持索引的列式存储</li>
+<li>Ceph:Linux分布式文件系统（特点：无中心）</li>
+<li>Storm：实时流数据处理，可以看下IBM的一篇介绍 （还有个Yahoo的S4，也是做流数据处理的）</li>
+<li>Druid: 实时数据分析存储系统</li>
+<li>Ambari: 大数据平台搭建、监控利器；类似的还有CDH</li>
+<li>Tachyon：分布式内存文件系统</li>
+<li><a href="http://greenplum.org/" target="_blank" rel="noopener">Greenplum</a>: 基于PostgreSQL的分布式MPP数据库</li>
+<li>Mesos：计算框架一个集群管理器，提供了有效的、跨分布式应用或框架的资源隔离和共享</li>
+<li>Impala：新一代开源大数据分析引擎，提供Sql语义，比Hive强在速度上</li>
+<li>presto: facebook的开源工具，大数据分布式sql查询引擎</li>
+<li>SNAPPY：快速的数据压缩系统，适用于Hadoop生态系统中</li>
+<li>Kafka:高吞吐量的分布式消息队列系统</li>
+<li>ActiveMQ:是Apache出品，最流行的，能力强劲的开源消息总线</li>
+<li>MQTT:Message Queuing Telemetry Transport，消息队列遥测传输）是IBM开发的一个即时通讯协议，有可能成为物联网的重要组成部分</li>
+<li>RabbitMQ：记得OpenStack就是用的这个东西吧</li>
+<li>ZeroMQ：宣称是将分布式计算变得更简单，是个分布式消息队列，可以看下云风的一篇文章的介绍</li>
+<li>开源的日志收集系统：scribe、chukwa、kafka、flume。这有一篇对比文章</li>
+<li>Zookeeper：可靠的分布式协调的开源项目</li>
+<li>Databus：LinkedIn 实时低延迟数据抓取系统</li>
+<li>数据源获取：Flume、Google Refine、Needlebase、ScraperWiki、BloomReach</li>
+<li>序列化技术：JSON、BSON、Thrift、Avro、Google Protocol Buffers</li>
+<li>NoSql：ScyllaDB（宣称是世界上最快的NoSql）、Apache Casandra、MongoDB、Apache CouchDB、Redis、BigTable、HBase、Hypertable、Voldemort、Neo4j</li>
+<li>MapReduce相关：Hive、Pig、Cascading、Cascalog、mrjob、Caffeine、S4、MapR、Acunu、Flume、Kafka、Azkaban、Oozie、Greenplum </li>
+<li>数据处理：R、Yahoo! Pipes、Mechanical Turk、Solr/ Lucene、ElasticSearch、Datameer、Bigsheets、Tinkerpop</li>
+<li>NLP自然语言处理：Natural Language Toolkit、Apache OpenNLP、Boilerpipe、OpenCalais</li>
+<li>机器学习：TensorFlow（Google出品），WEKA、Mahout、scikits.learn、SkyTree</li>
+<li>可视化技术：GraphViz、Processing、Protovis、Google Fusion Tables、Tableau、Highcharts、EChats（百度的还不错）、Raphaël.js</li>
+<li>Kettle：开源的ETL工具</li>
+<li>Pentaho：以工作流为核心的开源BI系统</li>
+<li>Mondrian：开源的Rolap服务器</li>
+<li>Oozie：开源hadoop的工作流调度引擎，类似的还有：Azkaban</li>
+<li>开源的数据分析可视化工具：Weka、Orange、KNIME</li>
+<li>Cobar：阿里巴巴的MySql分布式中间件</li>
+<li>数据清洗：data wrangler， Google Refine</li>
+</ul>
+<h2 id="Web前端"><a href="#Web前端" class="headerlink" title="Web前端"></a>Web前端</h2><ul>
+<li><a href="https://material.io/" target="_blank" rel="noopener">Material Design</a>: 谷歌出品，必属精品</li>
+<li>Vue.js: 借鉴了Angular及React的JS框架，设计理念较为先进</li>
+<li><a href="https://github.com/jsplumb/jsplumb" target="_blank" rel="noopener">jsplumb</a>: 流程图可视化库</li>
+<li><a href="https://github.com/cytoscape/cytoscape.js" target="_blank" rel="noopener">cytoscape.js</a>: 关系图谱可视化库</li>
+<li><a href="https://github.com/d3/d3" target="_blank" rel="noopener">d3</a>: 非常知名的数据可视化库（类似的还有NVD3，P5.js，Highcharts，Echart，Flot等）</li>
+<li><a href="https://vega.github.io/vega/" target="_blank" rel="noopener">Vega</a>: 基于D3的可视化语法</li>
+<li><a href="https://github.com/densitydesign/raw" target="_blank" rel="noopener">Raw</a>：非常不错的一款高级数据可视化工具</li>
+<li>Rickshaw: 时序图表库，可用于构建实时图表</li>
+<li>JavaScript InfoVis Toolkit：另一款Web数据可视化插件</li>
+<li>Pdf.js，在html中展现pdf</li>
+<li>ACE，CodeMirror：Html代码编辑器（ACE甚好啊）</li>
+<li>NProcess：绚丽的加载进度条</li>
+<li>impress.js：让你制作出令人眩目的内容展示效果(类似的还有reveal)</li>
+<li>Threejs：3DWeb库</li>
+<li>Hightopo：基于Html5的2D、3D可视化UI库</li>
+<li>jQuery.dataTables.js:高度灵活的表格插件</li>
+<li>Raphaël：js，canvas绘图库，后来发现百度指数的图形就是用它绘出来的</li>
+<li>director.js：js路由模块，前端路由，Nodejs后端路由等，适合构造单页应用</li>
+<li>pace.js：页面加载进度条</li>
+<li>bower：Web包管理器</li>
+<li>jsnice：有趣的js反编译工具，猜压缩后的变量名，<a href="http://www.jsnice.org/" target="_blank" rel="noopener">http://www.jsnice.org/</a></li>
+<li>Zepto.js：移动端替代jQuery的东东，当然也可以使用jquery-mobile.</li>
+<li>UI框架：Foundation，Boostrap，Pure，EasyUI，Polymer</li>
+<li>前端UI设计师必去的几个网站：Dribbble，awwwards，unmatchedstyle，UIMaker</li>
+<li>Mozilla 开发者中心：<a href="https://developer.mozilla.org/en-US/" target="_blank" rel="noopener">https://developer.mozilla.org/en-US/</a></li>
+<li>图标资源：IcoMoon（我的最爱），Font Awesome, Themify Icons，FreePik，Glyphicons</li>
+<li>artDialog:非常漂亮的对话框</li>
+<li>AdminLTE：github上的一个开源项目，基于Boostrap3的后台管理页面框架</li>
+<li>Respond.js：让不懂爱的IE6-8支持响应式设计</li>
+<li>require.js: js模块加载库</li>
+<li>select2：比chosen具有更多特性的选择框替代库</li>
+<li>AngularUI：集成angular.js的UI库</li>
+<li>normalize.css: 采用了现代化标准让各浏览器渲染出的html保持一致的库</li>
+<li>CreateJS：Html5游戏引擎</li>
+<li>Less,Compass:简化CSS开发</li>
+<li>emojify.js:用于自动识别网页上的Emoji文字并将其显示为图像</li>
+<li>simditor:一个不错的开源的html编辑器，简洁高效</li>
+<li>Sencha:  基于html5的移动端开发框架</li>
+<li>SuperScrollorama+TweenMax+skrollr:打造超酷的视差滚动效果网页动画</li>
+<li>jquery-smooth-scroll:同上，平滑滚动插件</li>
+<li>Animate.css:实现了各种动画效果的css库</li>
+<li>Emmet:前端工程师必备，前身为 Zen Coding</li>
+<li>React: facebook出品的js UI库</li>
+<li>highlight.js：专门用来做语法高亮的库</li>
+<li>GoJS: Html5交互式图表库，看demo更适合层次结构的图表。</li>
+<li>10 Pure CSS (Mostly) Flat Mobile Devices: <a href="http://marvelapp.github.io/devices.css/" target="_blank" rel="noopener">http://marvelapp.github.io/devices.css/</a></li>
+<li>CodePen: <a href="http://codepen.io/" target="_blank" rel="noopener">http://codepen.io/</a></li>
+<li>jsfiddle: <a href="http://jsfiddle.net/" target="_blank" rel="noopener">http://jsfiddle.net/</a> 前端js，html，css测试利器</li>
+</ul>
+<h2 id="语言篇"><a href="#语言篇" class="headerlink" title="语言篇"></a>语言篇</h2><p>折腾中：Scala、Python、Lua、JavaScript、Go</p>
+<p>待折腾：</p>
+<ul>
+<li><a href="http://racket-lang.org/" target="_blank" rel="noopener">Racket</a></li>
+<li><a href="http://ocaml.org/" target="_blank" rel="noopener">OCaml</a></li>
+<li><a href="https://www.rust-lang.org" target="_blank" rel="noopener">Rust</a></li>
+<li><a href="http://julialang.org/" target="_blank" rel="noopener">Julia</a></li>
+</ul>
+<h3 id="Scala"><a href="#Scala" class="headerlink" title="Scala"></a>Scala</h3><ul>
+<li><a href="http://www.scala-lang.org/api/current/" target="_blank" rel="noopener">Scala Standard Library API</a></li>
+<li><a href="http://twitter.github.io/scala_school/" target="_blank" rel="noopener">Scala School!</a>: A Scala tutorial by Twitter</li>
+<li><a href="http://docs.scala-lang.org/tutorials/tour/tour-of-scala.html" target="_blank" rel="noopener">A Tour of Scala</a>: Tutorial introducing the main concepts of Scala</li>
+<li><a href="http://stackoverflow.com/tags/scala/info" target="_blank" rel="noopener">Scala Overview on StackOverflow</a>: A list of useful questions sorted by topic</li>
+<li><a href="http://www.artima.com/pins1ed/" target="_blank" rel="noopener">Programming in Scala</a>，最新的第3版，还没有电子版，电子版是第一版</li>
+<li>《Scala for the Impatient》</li>
+<li>《Scala in Depth》</li>
+<li>《Programming Scala》Dean Wampler and Alex Payne. O’Reilly 2009</li>
+<li><a href="http://www.scala-lang.org/docu/files/ScalaByExample.pdf" target="_blank" rel="noopener">Scala By Example</a></li>
+<li><a href="http://docs.scala-lang.org/cheatsheets/" target="_blank" rel="noopener">Scala Cheatsheet</a>学习模式匹配的好资料</li>
+<li><a href="http://docs.scala-lang.org/glossary/" target="_blank" rel="noopener">Glossary of Scala and FP terms</a></li>
+<li><a href="https://github.com/lihaoyi/Metascala" target="_blank" rel="noopener">Metascala: A JVM written in Scala</a></li>
+<li><a href="https://scala-lms.github.io/" target="_blank" rel="noopener">LMS: Program Generation and Embedded Compilers in Scala</a></li>
+<li><a href="https://github.com/sirthias/parboiled2" target="_blank" rel="noopener">parboiled2</a>: 性能很好的parser</li>
+</ul>
+<h3 id="Java"><a href="#Java" class="headerlink" title="Java"></a>Java</h3><ul>
+<li>常用的IDE：<a href="https://www.jetbrains.com/idea/" target="_blank" rel="noopener">IntelliJ IDEA</a>(强烈推荐)，Eclipse，Netbeans</li>
+<li><a href="http://fastutil.di.unimi.it/" target="_blank" rel="noopener">fastutil</a>: 性能更好的Java集合框架</li>
+<li><a href="https://github.com/google/guava" target="_blank" rel="noopener">Guava</a>: 谷歌的Java工具包，应用广泛</li>
+<li><a href="http://openjdk.java.net/projects/code-tools/jmh/" target="_blank" rel="noopener">JMH</a>: Java Benchmark性能测试框架</li>
+<li><a href="https://vertx.io/" target="_blank" rel="noopener">Vert.x</a>: 性能彪悍的异步非阻塞编程框架</li>
+<li><a href="https://www.lagomframework.com/" target="_blank" rel="noopener">Lagom</a>: 微服务框架，提供了Java、Scala API</li>
+<li>jOOQ：java Orm框架</li>
+<li>Janino: 超级小又快的Java编译器，Spark的Tungsten引起用的它</li>
+<li>Curator：Netflix公司开源的一个Zookeeper client library，用于简化Zookeeper客户端编程，现在已经是apache下的一个独立项目了。Spark的HA也用的这货。</li>
+<li>Rx(Reactive Extensions)框架：RxJava(Android中用的比较多),  Quasar</li>
+<li>FindBugs: 代码静态分析工具，找出代码缺陷</li>
+<li>Java反编译工具：Luyten，JD-Gui,Procyon-Decompiler</li>
+<li>Drools: 规则引擎</li>
+<li>Jersey: Java RESTful 框架</li>
+<li>canal: 阿里巴巴出品，binlog增量订阅&消费组件</li>
+<li>Web开发相关：Tomcat、Resin、Jetty、WebLogic等，常用的组件Struts，Spring，Hibernate</li>
+<li>Netty: 异步事件驱动网络应用编程框架，用于高并发网络编程比较好（NIO框架，spark 1.2.0就用netty替代了nio）</li>
+<li>MINA：简单地开发高性能和高可靠性的网络应用程序（也是个NIO框架），不少手游服务端是用它开发的</li>
+<li>Activiti:工作流引擎，类似的还有jBPM、Snaker</li>
+<li>Perfuse:是一个用户界面包用来把有结构与无结构数据以具有交互性的可视化图形展示出来.</li>
+<li>Gephi:复杂网络分析软件, 其主要用于各种网络和复杂系统，动态和分层图的交互可视化与探测开源工具</li>
+<li>Nutch:知名的爬虫项目，hadoop就是从这个项目中发展出来的</li>
+<li>web-harvest：Web数据提取工具</li>
+<li>POM工具：Maven+Artifactory</li>
+<li>Akka:一款基于actor模型实现的 并发处理框架</li>
+<li>EclEmma：覆盖测试工具</li>
+<li>Shiro:安全框架</li>
+<li>joda-time:简化时间处理</li>
+<li>parboiled:表达式解析</li>
+<li>dozer: 深拷贝神器</li>
+<li>dubbo: 阿里巴巴出品的分布式服务框架</li>
+<li>jackson databind: json序列化工具(fastjson,simplejson)</li>
+<li>Atomikos: 分布式事务管理</li>
+<li>BoneCP：性能很赞的数据库连接池组件，据说比c3p0快好多</li>
+<li>ProGuard: obconfuscation tool, 强大的混淆工具</li>
+<li>S-99：Scala相关的99个问题</li>
+</ul>
+<h3 id="Python"><a href="#Python" class="headerlink" title="Python"></a>Python</h3><ul>
+<li>PyCharm：最佳Python IDE</li>
+<li>Eric,Eclipse+pydev,比较不错的Python IDE</li>
+<li>PyWin:Win32 api编程包</li>
+<li>numpy:科学计算包，主要用来处理大型矩阵计算等，此外还有SciPy，Matplotlib</li>
+<li>GUI相关：PyQt，PyQwt</li>
+<li>supervisor:进程监控工具</li>
+<li>PyGame: 基于Python的多媒体开发和游戏软件开发模块</li>
+<li>Web框架: Django 开源web开发框架，它鼓励快速开发,并遵循MVC设计</li>
+</ul>
+<h3 id="Swift"><a href="#Swift" class="headerlink" title="Swift"></a>Swift</h3><ul>
+<li><a href="https://github.com/ipader/SwiftGuide" target="_blank" rel="noopener">Swift精选资料</a></li>
+<li><a href="http://www.csdn.net/article/2015-01-09/2823502-swift-open-source-libs" target="_blank" rel="noopener">43个优秀的开源项目</a></li>
+</ul>
+<p><strong>客户端</strong></p>
+<ul>
+<li><a href="https://github.com/YANGReal/JokeClient-Swift" target="_blank" rel="noopener">糗事百科 Swift</a></li>
+<li><a href="https://github.com/amitburst/HackerNews" target="_blank" rel="noopener">HackerNews Swift</a></li>
+<li><a href="https://github.com/jxd001/Swift-ZhihuDaily" target="_blank" rel="noopener">知乎日报app</a></li>
+</ul>
+<p><strong>Framework</strong></p>
+<ul>
+<li><a href="https://github.com/mattdonnelly/Swifter" target="_blank" rel="noopener">Twitter框架</a></li>
+<li><a href="https://github.com/glock45/swifter" target="_blank" rel="noopener">Mac下简单HTTP Server Swifter</a></li>
+</ul>
+<p><strong>小工具</strong></p>
+<ul>
+<li><a href="https://github.com/ChrisChares/swift-alarm" target="_blank" rel="noopener">Swift Alarm</a></li>
+<li><a href="https://github.com/mslathrop/SwiftNote" target="_blank" rel="noopener">Swift Note</a></li>
+<li><a href="https://github.com/wantedly/swift-rss-sample" target="_blank" rel="noopener">Swift RSS Reader</a></li>
+<li><a href="https://github.com/sxyx2008/Swift-PM25" target="_blank" rel="noopener">Swift-PM2.5查询app</a></li>
+</ul>
+<p><strong>游戏</strong></p>
+<ul>
+<li><a href="https://github.com/fullstackio/FlappySwift" target="_blank" rel="noopener">Flappy Swift</a></li>
+<li><a href="https://github.com/geek5nan/FanFanSwift" target="_blank" rel="noopener">FanFan Swift</a></li>
+</ul>
+<h3 id="NET"><a href="#NET" class="headerlink" title=".NET"></a>.NET</h3><ul>
+<li>Xilium.CefGlue:基于CEF框架的.NET封装，基于.NET开发Chrome内核浏览器</li>
+<li>CefSharp：同上，有一款WebKit的封装，C#和Js交互会更简单</li>
+<li>netz:免费的 .NET 可执行文件压缩工具</li>
+<li>SmartAssembly:变态的.net代码优化混淆工具</li>
+<li>NETDeob0：.net反混淆工具，真是魔高一尺道高一丈啊(还有个de4dot，在GitHub上，都是开源的)</li>
+<li>ILMerge：将所有引用的DLL和exe文件打成一个exe文件</li>
+<li>ILSpy:开源.net程序反编译工具</li>
+<li>Javascript.NET：很不错的js执行引擎，对v8做了封装</li>
+<li>NPOI: Excel操作</li>
+<li>DotRAS:远程访问服务的模块</li>
+<li>WinHtmlEditor: Winform下的html编辑器</li>
+<li>SmartThreadPool:使用C#实现的，带高级特性的线程池</li>
+<li>Snoop: WPF Spy Utility</li>
+<li>Autofac: 轻量级IoC框架</li>
+<li>HtmlAgilityPack：Html解析利器</li>
+<li>Quartz.NET：Job调度</li>
+<li>HttpLib：@CodePlex，简化http请求</li>
+<li>SuperSocket：简化Socket操作，基于他的还有个SuperWebSocket，可以开发独立的WebSocket服务器了</li>
+<li>DocX：未安装Office的情况下操作Word文件</li>
+<li>Dapper：轻量级的ORM类，性能不错</li>
+<li>HubbleDotNet：支持接入数据库的全文搜索系统</li>
+<li>fastJSON：@CodeProject，高性能的json序列化类</li>
+<li>ZXing.NET：@CodePlex，QR，条形码相关</li>
+<li>Nancy：轻量级Http服务器，做个小型的Web应用可以摆脱IIS喽(Nancy.Viewengines.Razor,可以加入Razor引擎)</li>
+<li>AntiXSS：微软的XSS防御库Microsoft Web Protection Library</li>
+<li>Jint：JavaScript解释器</li>
+<li>CS-Script：将C#代码文件作为脚本执行</li>
+<li>Jexus：Linux下 高性能、易用、免费的ASP.NET服务器</li>
+<li>Clay：将dynamic发挥的更加灵活，像写js一样写C#</li>
+<li>DynamicJSON：不必定义数据模型获取json数据</li>
+<li>SharpPcap：C#版的WinPcap调用端，牛逼的网络包分析库（自带PacketNotNet用于包协议分析）</li>
+<li>Roslyn：C#，VB编译器</li>
+<li>ImageResizer: 服务端自由控制图片大小，真乃神器也，对手机端传小图，PC端传大图，CMS用它很方便</li>
+<li>UI相关：DevExpress, Fluent(Office 07风格), mui（Modern UI for WPF）</li>
+<li>NetSparkle：应用自动更新组件</li>
+<li>ConfuserEx: 开源.net混淆工具</li>
+<li>ServiceStack: 开源高性能Web服务框架，可用于构建高性能的REST服务</li>
+<li>Expression Evaluator：Eval for C#,处理字符串表达式</li>
+<li><a href="http://nugetmusthaves.com/" target="_blank" rel="noopener">http://nugetmusthaves.com/</a></li>
+<li>Reactive Extensions (Rx):异步，事件驱动编程包， Rx = Observables + LINQ + Schedulers</li>
+</ul>
+<h3 id="C-amp-C"><a href="#C-amp-C" class="headerlink" title="C & C++"></a>C & C++</h3><ul>
+<li>Thrift:用来进行可扩展且跨语言的服务的开发(类似的还有个Avro，Google protobuf)。</li>
+<li>libevent:是一个事件触发的网络库，适用于windows、linux、bsd等多种平台，内部使用select、epoll、kqueue等系统调用管理事件机制。（对了还有个libev呢）</li>
+<li>Boost:不多说了，准C++标准库</li>
+<li>Valgrind\Ptmalloc\Purify: 调试工具</li>
+<li>NetworkServer架构：acceptor->dispatcher->worker(这个不算工具哦)</li>
+<li><a href="https://pocoproject.org/" target="_blank" rel="noopener">POCO</a> - 开源的C++类库及应用程序框架的集合,它主要提供简单的、快速的网络和可移植应用程序</li>
+<li>breakpad:崩溃转储和分析模块，很多crashreport会用到</li>
+<li>UI界面相关：MFC、BCG和QT这类的就不说了，高端一点的还有Html和DirectUI技术：libcef（基于chrome内核的，想想使用html5开发页面，还真有点小激动呢）、HtmlLayout、Duilib、Bolt，非C++的，还有node-webkit也不错，集成了node和webkit内核。</li>
+</ul>
+<h2 id="其他"><a href="#其他" class="headerlink" title="其他"></a>其他</h2><h3 id="游戏开发相关"><a href="#游戏开发相关" class="headerlink" title="游戏开发相关"></a>游戏开发相关</h3><ul>
+<li>MINA：使用Java开发手游和页游服务器(对了还有Netty，也很猛的，都是基于NIO的)</li>
+<li>HP-Socket：见有有些页游服务器使用这个构建的</li>
+<li>Unreal: 虚幻引擎，C++，基于这个引擎的游戏很多</li>
+<li>OGRE：大名鼎鼎的3D图形渲染引擎，天龙八部OL、火炬之光等不少游戏都用了这个引擎</li>
+<li>OpenVDB：梦工厂C++的特效库，开源的</li>
+<li>cocos2d：跨平台2D游戏引擎</li>
+<li>unity3d：跨平台3D游戏引擎，很火的哦</li>
+<li>Nodejs：也有不少使用它来开发手游和页游服务器（网易的Pomelo）</li>
+</ul>
+<h3 id="日志聚合，分布式日志收集"><a href="#日志聚合，分布式日志收集" class="headerlink" title="日志聚合，分布式日志收集"></a>日志聚合，分布式日志收集</h3><ul>
+<li>Scribe：Facebook的（nodejs + scribe + inotify 同步日志）</li>
+<li>logstash:强大的日志收集系统，可以基于logstash+kibana+elasticsearch+redis开发强大的日志分析平台</li>
+<li>log.io: nodejs开发的实时日志收集系统</li>
+<li>Graylog: 易用、功能丰富的日志管理系统， 部署、维护、搜索比<code>ELK</code>简单</li>
+</ul>
+<h3 id="RTP-实时传输协议与音视频"><a href="#RTP-实时传输协议与音视频" class="headerlink" title="RTP,实时传输协议与音视频"></a>RTP,实时传输协议与音视频</h3><ul>
+<li>RTP，RTCP，RTSP-> librtp，JRTPLIB(遵循了RFC1889标准)</li>
+<li>环形缓冲区，实时数据传输用</li>
+<li>SDL,ffmpeg,live555,Speex</li>
+<li>Red5:用Java开发开源的Flash流媒体服务器。它支持：把音频（MP3）和视频（FLV）转换成播放流； 录制客户端播放流（只支持FLV）；共享对象；现场直播流发布；远程调用。</li>
+</ul>
+</body></html></div></article><div class="post-copyright"><div class="post-copyright__author"><span class="post-copyright-meta">文章作者: </span><span class="post-copyright-info"><a href="mailto:live_devOps@163.com">YoungBoy</a></span></div><div class="post-copyright__type"><span class="post-copyright-meta">文章链接: </span><span class="post-copyright-info"><a href="http://it-ing.cn/2020/05/14/it-summary/">http://it-ing.cn/2020/05/14/it-summary/</a></span></div><div class="post-copyright__notice"><span class="post-copyright-meta">版权声明: </span><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank" rel="noopener">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="http://it-ing.cn">X</a>！</span></div></div><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E6%95%B4%E7%90%86/">整理    </a></div><div class="post_share"><div class="social-share" data-image="//goss.cfp.cn/creative/vcg/nowarter800/new/VCG41N940143972.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/social-share.js/dist/css/share.min.css"><script src="https://cdn.jsdelivr.net/npm/social-share.js/dist/js/social-share.min.js"></script></div></div><div class="post-reward"><a class="reward-button button--primary button--animated"> <i class="fa fa-qrcode"></i> 打赏<div class="reward-main"><ul class="reward-all"><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/wechat.jpg" alt="微信"><div class="post-qr-code__desc">微信</div></li><li class="reward-item"><img class="lazyload post-qr-code__img" src="/img/alipay.jpg" alt="支付寶"><div class="post-qr-code__desc">支付寶</div></li></ul></div></a></div><nav class="pagination_post" id="pagination"><div class="next-post pull-full"><a href="/2020/05/08/Front-End-CSS/"><img class="next_cover lazyload" data-src="https://tingres.obs.cn-north-4.myhuaweicloud.com/it-ing.cn/20200503/1.png" onerror="onerror=null;src='/img/404.jpg'"><div class="label">下一篇</div><div class="next_info"><span>前端换肤的N种方案，请收下</span></div></a></div></nav><hr><div id="post-comment"><div class="comment_headling"><i class="fa fa-comments fa-fw" aria-hidden="true"></i><span> 评论</span></div><div id="lv-container" data-id="city" data-uid="MTAyMC8zOTA5NS8xNTYyMg=="><script>(function(d, s) {
+    var j, e = d.getElementsByTagName(s)[0];
+    if (typeof LivereTower === 'function') { return; }
+    j = d.createElement(s);
+    j.src = 'https://cdn-city.livere.com/js/embed.dist.js';
+    j.async = true;
+    e.parentNode.insertBefore(j, e);
+})(document, 'script');</script></div></div></div></main><footer id="footer" style="background-image: url(//goss.cfp.cn/creative/vcg/nowarter800/new/VCG41N940143972.jpg)" data-type="photo"><div id="footer-wrap"><div class="copyright">&copy;2017 - 2020</div><div class="framework-info"><span>Power By</span><a href="https://github.com/by1773" target="_blank" rel="noopener"></a><span class="footer-separator">YoungBoy</span></div><div class="footer_custom_text">既然来了,就别着急走哇~</div></div></footer></div><section class="rightside" id="rightside"><div id="rightside-config-hide"><i class="fa fa-book" id="readmode" title="阅读模式"></i><i class="fa fa-plus" id="font_plus" title="放大字体"></i><i class="fa fa-minus" id="font_minus" title="缩小字体"></i><a class="translate_chn_to_cht" id="translateLink" href="javascript:translatePage();" title="简繁转换" target="_self">繁</a><i class="darkmode fa fa-moon-o" id="darkmode" title="夜间模式"></i></div><div id="rightside-config-show"><div id="rightside_config" title="设置"><i class="fa fa-cog" aria-hidden="true"></i></div><a id="to_comment" href="#post-comment" title="直达评论"><i class="scroll_to_comment fa fa-comments">  </i></a><i class="fa fa-list-ul close" id="mobile-toc-button" title="目录" aria-hidden="true"></i><i class="fa fa-arrow-up" id="go-up" title="回到顶部" aria-hidden="true"></i></div></section><script src="https://cdn.jsdelivr.net/npm/jquery@latest/dist/jquery.min.js"></script><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@latest/dist/jquery.fancybox.min.js"></script><script src="https://cdn.jsdelivr.net/npm/animejs@latest/anime.min.js"></script><script src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/fireworks.js"></script><script src="https://cdn.jsdelivr.net/npm/node-snackbar/dist/snackbar.min.js"></script><script id="ribbon_piao" mobile="true" src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/piao.js"></script><script id="canvas_nest" color="0,0,255" opacity="0.7" zIndex="-1" count="99" mobile="false" src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/canvas-nest.js"></script><script src="https://cdn.jsdelivr.net/npm/activate-power-mode/dist/activate-power-mode.min.js"></script><script>POWERMODE.colorful = true;
+POWERMODE.shake = true; 
+document.body.addEventListener('input', POWERMODE);
+</script><script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script src="https://cdn.jsdelivr.net/npm/instant.page@latest/instantpage.min.js" type="module"></script><script src="https://cdn.jsdelivr.net/npm/lazysizes@latest/lazysizes.min.js" async=""></script><script src="https://cdn.jsdelivr.net/gh/jerryc127/butterfly_cdn@2.1.0/js/ClickShowText.js"></script><div class="search-dialog" id="local-search"><div class="search-dialog__title" id="local-search-title">本地搜索</div><div id="local-input-panel"><div id="local-search-input"><div class="local-search-box"><input class="local-search-box--input" placeholder="搜索文章"></div></div></div><hr><div id="local-search-results"><div id="local-hits"></div><div id="local-stats"><div class="local-search-stats__hr" id="hr"><span>由</span> <a href="https://github.com/wzpan/hexo-generator-search" target="_blank" rel="noopener" style="color:#49B1F5;">hexo-generator-search</a>
+ <span>提供支持</span></div></div></div><span class="search-close-button"><i class="fa fa-times"></i></span></div><div class="search-mask"></div><script src="/live2dw/lib/L2Dwidget.min.js?094cbace49a39548bed64abff5988b05"></script><script>L2Dwidget.init({"mobile":{"show":false},"model":{"jsonPath":"/live2dw/assets/Epsilon2.1.model.json"},"display":{"position":"left","width":150,"height":300},"log":false,"pluginJsPath":"lib/","pluginModelPath":"assets/","pluginRootPath":"live2dw/","tagMode":false});</script></body></html>
