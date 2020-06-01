@@ -18,6 +18,13 @@ body {
   font-size: 14px;
   font-family: ZCOOL KuaiLe;
   line-height: 2;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  -moz-user-select: none;
+  -webkit-user-select: none;
+  -ms-user-select: none;
 }
 #body-wrap {
   position: relative;
