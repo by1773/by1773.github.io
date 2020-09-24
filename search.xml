@@ -7177,6 +7177,12 @@ document.body.offsetWidth +"/"+ document.body.offsetHeight</code></pre>
         -v /home/evan/workspace/wxserver/nginx/logs:/var/log/nginx/:rw
         -v /home/evan/workspace/wxserver/nginx/ssl:/ssl/:rw
         -d nginx</code></pre>
+<p>或者</p>
+<pre><code class="jsx">   docker run --name local-nginx -d -p 80:80  
+   -v /home/nginx/logs:/logs  
+   -v /home/nginx/conf/nginx.conf:/etc/nginx/nginx.conf  
+   -v /home/nginx/conf.d:/etc/nginx/conf.d  
+   -v /home/nginx/html:/usr/share/nginx/html nginx</code></pre>
 <ul>
 <li>映射端口443，用于https请求</li>
 <li>映射端口80，用于http请求；</li>
